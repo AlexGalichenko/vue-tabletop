@@ -17,7 +17,11 @@ export default {
 
     socket.on('update_object', object => {
       store.commit('updateObject', object);
-    })
+    });
+
+    socket.on('move_start', objectId => {
+      store.commit('makeDragged', objectId);
+    });
   },
 
   loadGame(store, game) {

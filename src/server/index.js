@@ -20,9 +20,7 @@ io.on('connection', socket => {
     io.emit('new_user', username);
 
     socket.on('move_start', payload => {
-      const object = db.objects.find(obj => obj.id === payload);
-      object.isDragged = true;
-      io.emit('update_object', object);
+      io.emit('move_start', payload);
     });
 
     socket.on('move_stop', payload => {

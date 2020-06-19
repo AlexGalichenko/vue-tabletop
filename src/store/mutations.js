@@ -14,9 +14,12 @@ export default {
 
   updateObject(state, object) {
     const currentObject = state.objects.find(obj => obj.id === object.id);
-    if (!!currentObject.isDragged === false || !!object.isDragged === false) {
-      Object.assign(currentObject, object);
-    }
+    Object.assign(currentObject, object);
+  },
+
+  makeDragged(state, objectId) {
+    const currentObject = state.objects.find(obj => obj.id === objectId);
+    currentObject.isDragged = true;
   },
 
   move(state, { event, object }) {
