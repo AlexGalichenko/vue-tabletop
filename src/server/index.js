@@ -9,7 +9,6 @@ const db = require('./db.json');
 server.listen(process.env.PORT || 8000);
 
 app.use(express.static('dist'));
-app.use(express.compress());
 
 io.on('connection', socket => {
 
