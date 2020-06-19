@@ -19,16 +19,23 @@ io.on('connection', socket => {
     // let all know that user are added
     io.emit('new_user', username);
 
-    socket.on('move', payload => {
+    socket.on('move_start', payload => {
+      const object = db.objects.find(obj => obj.id === payload);
+      object.isDragged = true;
+      io.emit('update_object', object);
+    });
+
+    socket.on('move_stop', payload => {
       const object = db.objects.find(obj => obj.id === payload.id);
       Object.assign(object, payload);
+      object.isDragged = false;
       io.emit('update_object', object);
     });
 
     socket.on('load_game', payload => {
       db.objects = payload;
       io.emit('initial_load', db);
-    })
+    });
 
   });
 

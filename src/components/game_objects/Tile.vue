@@ -1,5 +1,5 @@
 <template>
-  <div :style="style" class="tile" />
+  <div :style="style" :class="objectClass" />
 </template>
 
 <script>
@@ -14,13 +14,19 @@ export default {
       return this.object.isFlipped ? this.backStyle : this.frontStyle;
     },
 
+    objectClass() {
+      const dragged = this.object.isDragged ? `dragged` : ''
+      return `tile ${dragged}`
+    },
+
     frontStyle() {
       return {
-        height: `${this.object.height}px`,
-        width: `${this.object.width}px`,
-        "background-image": `url(${this.object.frontUrl})`,
-        "background-size": `100% 100%`,
-        transform: `translate(${this.object.x}px, ${this.object.y}px)`
+        'height': `${this.object.height}px`,
+        'width': `${this.object.width}px`,
+        'background-image': `url(${this.object.frontUrl})`,
+        'background-size': `100% 100%`,
+        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'opacity': `${this.object.isDragged ? 50 : 100}%`
       };
     },
 
@@ -29,8 +35,10 @@ export default {
     }
   },
   mounted() {
+    const vueThis = this;
+    
     interact(this.$el).draggable({
-      ignoreFrom: ".pinned",
+      ignoreFrom: ".pinned, .dragged",
       inertia: {
         resistance: 60
       },
@@ -40,9 +48,14 @@ export default {
         elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
       },
       listeners: {
-        move: (event) => {
-          console.log(event);
-          this.$store.dispatch('move', { event, object: this.object })
+        start(event) {
+          vueThis.$store.dispatch('moveStart', vueThis.object);
+        },
+        move(event) {
+          vueThis.$store.commit('move', { event, object: vueThis.object })
+        },
+        end(event) {
+          vueThis.$store.dispatch('moveStop', vueThis.object);
         }
       }
     });
@@ -51,4 +64,7 @@ export default {
 </script>
 
 <style scoped>
+  .dragged {
+    opacity: 50%;
+  }
 </style>

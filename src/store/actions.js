@@ -20,18 +20,15 @@ export default {
     })
   },
 
-  move(store, { event, object}) {
-    socket.emit('move', {
-      x: object.x + event.dx,
-      y: object.y + event.dy,
-      z: 0,
-      id: object.id
-    })
+  loadGame(store, game) {
+    socket.emit('load_game', game);
   },
 
-  loadGame(store, game) {
-    console.log(game)
-    socket.emit('load_game', game);
-  }
+  moveStart(store, object ) {
+    socket.emit('move_start', object.id);
+  },
 
+  moveStop(store, object) {
+    socket.emit('move_stop', object);
+  }
 }
