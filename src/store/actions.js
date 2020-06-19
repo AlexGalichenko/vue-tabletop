@@ -6,6 +6,7 @@ export default {
     store.commit('updateName', window.localStorage.getItem("name"));
 
     socket.emit('socket_connect', store.username);
+
     socket.on('initial_load', payload => {
       store.commit('loadObjects', payload.objects);
     });
@@ -26,6 +27,11 @@ export default {
       z: 0,
       id: object.id
     })
+  },
+
+  loadGame(store, game) {
+    console.log(game)
+    socket.emit('load_game', game);
   }
 
 }

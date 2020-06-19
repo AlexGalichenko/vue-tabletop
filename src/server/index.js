@@ -25,6 +25,11 @@ io.on('connection', socket => {
       io.emit('update_object', object);
     });
 
+    socket.on('load_game', payload => {
+      db.objects = payload;
+      io.emit('initial_load', db);
+    })
+
   });
 
 });

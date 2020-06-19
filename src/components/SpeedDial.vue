@@ -20,7 +20,7 @@
       <md-button class="md-icon-button" @click="saveGame">
         <i class="fas fa-download" />
       </md-button>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button" @click="$emit('showImportDialog')">
         <i class="fas fa-upload" />
       </md-button>
     </md-speed-dial-content>
