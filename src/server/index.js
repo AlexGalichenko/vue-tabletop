@@ -5,8 +5,8 @@ const server = require('http').Server(app);
 const io = require('socket.io')(server, { serveClient: false });
 const db = require('./db.json');
 
-server.listen(80);
-// WARNING: app.listen(80) will NOT work here!
+// heroku port
+server.listen(process.env.PORT || 80);
 
 app.use(express.static('dist'));
 
