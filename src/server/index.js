@@ -1,8 +1,14 @@
-const app = require('http').createServer();
-const io = require('socket.io')(app, { serveClient: false });
-const db = require('../../db.json');
+const path = require('path');
+const express = require('express');
+const app = express();
+const server = require('http').Server(app);
+const io = require('socket.io')(server, { serveClient: false });
+const db = require('./db.json');
 
-app.listen(80);
+server.listen(80);
+// WARNING: app.listen(80) will NOT work here!
+
+app.use(express.static('dist'));
 
 io.on('connection', socket => {
 
