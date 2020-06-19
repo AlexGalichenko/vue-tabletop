@@ -6,9 +6,10 @@ const io = require('socket.io')(server, { serveClient: false });
 const db = require('./db.json');
 
 // heroku port
-server.listen(process.env.PORT || 80);
+server.listen(process.env.PORT || 8000);
 
 app.use(express.static('dist'));
+app.use(express.compress());
 
 io.on('connection', socket => {
 

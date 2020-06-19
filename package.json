@@ -11,8 +11,8 @@
     "server": "node dist/server.js",
 
     "start": "npm run server",
-    "prestart": "npm run webpack:server",
-    "preprestart": "npm run webpack:client"
+    "prestart": "npm run webpack:client",
+    "preprestart": "npm run webpack:server"
   },
   "keywords": [
     "tabletop",
