@@ -1,6 +1,6 @@
 export default {
 
-  updateObjects(state, objects) {
+  loadObjects(state, objects) {
     state.objects = objects;
   },
 
@@ -10,6 +10,11 @@ export default {
 
   addPlayer(state, username) {
     state.players.push(username);
+  },
+
+  updateObject(state, object) {
+    const currentObject = state.objects.find(obj => obj.id === object.id);
+    Object.assign(currentObject, object);
   }
 
 }

@@ -1,15 +1,15 @@
-const path = require("path");
-const VueLoaderPlugin = require("vue-loader/lib/plugin");
-const HtmlWebpackPlugin = require("html-webpack-plugin");
+const path = require('path');
+const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  mode: "development",
+  mode: 'development',
   entry: {
-    app: "./src/main.js",
+    app: './src/main.js',
   },
   output: {
-    path: path.resolve("./dist"),
-    filename: "bundle.js"
+    path: path.resolve('./dist'),
+    filename: 'bundle.js'
   },
   module: {
     rules: [
@@ -23,18 +23,18 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|gif|woff|woff2|ttf|eot)$/,
         use: [
-          "file-loader"
+          'file-loader'
         ]
       },
       {
         test: /\.vue$/,
-        loader: ["vue-loader"]
+        loader: ['vue-loader']
       },
       {
         test: /\.css$/,
         loader: [
-          "vue-style-loader",
-          "css-loader"
+          'vue-style-loader',
+          'css-loader'
         ]
       },
       // {
@@ -48,8 +48,8 @@ module.exports = {
   plugins: [
     new VueLoaderPlugin(),
     new HtmlWebpackPlugin({
-      template: "./src/index.html",
-      filename: "index.html"
+      template: './src/index.html',
+      filename: 'index.html'
     }),
   ]
 };

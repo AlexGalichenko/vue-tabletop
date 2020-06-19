@@ -19,7 +19,6 @@ export default {
   methods: {
     login() {
       window.localStorage.setItem("name", this.name);
-      this.$store.dispatch('login', this.name);
       this.$router.push('/game');
     }
   },

@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "vue tabletop simulator",
   "scripts": {
-    "webpack": "webpack --mode development --config webpack.conf.js",
+    "webpack": "webpack --mode production --config webpack.conf.js",
+    "webpack:server": "webpack --mode production --config webpack.server.conf.js",
     "webpack:watch": "webpack --mode development --config webpack.conf.js --watch",
-    "server": "node ./src/server"
+    "webpack:watch:server": "webpack --mode development --config webpack.server.conf.js",
+    "server": "node dist/server.js"
   },
   "keywords": [
     "tabletop",
@@ -14,13 +16,13 @@
   "author": "Alexandr Galichenko",
   "license": "MIT",
   "dependencies": {
+    "interactjs": "^1.9.19",
+    "socket.io": "^2.3.0",
+    "socket.io-client": "^2.3.0",
     "vue": "^2.6.11",
     "vue-material": "^1.0.0-beta-14",
     "vue-router": "^3.3.4",
-    "vuedraggable": "^2.23.2",
-    "vuex": "^3.4.0",
-    "socket.io": "^2.3.0",
-    "socket.io-client": "^2.3.0"
+    "vuex": "^3.4.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.6",
