@@ -12,9 +12,10 @@ jobs:
       
       - uses: actions/checkout@v2
       - name: Run a one-line script
-        run: npm install
-        run: npm run webpack:client
-        run: npm run webpack:server
+        run: |
+          npm install
+          npm run webpack:client
+          npm run webpack:server
       - uses: akhileshns/heroku-deploy@v3.0.5 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
