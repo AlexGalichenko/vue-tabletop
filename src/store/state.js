@@ -1,5 +1,10 @@
 export default {
   username: null,
   players: [],
-  objects: []
+  objects: [],
+
+  contextMenu: {
+    show: false
+  },
+  currentObject: null,
 }

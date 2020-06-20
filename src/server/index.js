@@ -1,4 +1,5 @@
-const path = require('path');
+const uniqid = require('uniqid');
+const cloneDeep = require('clone-deep');
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
@@ -33,6 +34,28 @@ io.on('connection', socket => {
     socket.on('load_game', payload => {
       db.objects = payload;
       io.emit('initial_load', db);
+    });
+
+    socket.on('take_container', payload => {
+      const container = db.objects.find(obj => obj.id === payload);
+
+      if (container.objects.length > 0) {
+        const object = container.infinite 
+          ? container.objects[0]
+          : container.objects.pop();
+  
+        if (container.infinite) {
+          object.id = uniqid();
+        }
+        object.x = container.x + 25;
+        object.y = container.y + 25;
+        object.z = 0;
+        object.owner = '';
+        
+        db.objects.push(object);
+        io.emit('update_object', container);
+        io.emit('create_object', object);
+      }
     });
 
   });

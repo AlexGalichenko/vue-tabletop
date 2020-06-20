@@ -17,6 +17,10 @@ export default {
     Object.assign(currentObject, object);
   },
 
+  createObject(state, object) {
+    state.objects.push(object);
+  },
+
   makeDragged(state, objectId) {
     const currentObject = state.objects.find(obj => obj.id === objectId);
     currentObject.isDragged = true;
@@ -27,6 +31,21 @@ export default {
     currentObject.x += event.dx;
     currentObject.y += event.dy;
     currentObject.z += 0;
-  }
+  },
+
+  showContextMenu(state, position) {
+    state.contextMenu = {
+      show: true,
+      ...position
+    };
+  },
+
+  hideContextMenu(state) {
+    state.contextMenu.show = false;
+  },
+
+  setCurrentObject(state, object) {
+    state.currentObject = object;
+  },
 
 }

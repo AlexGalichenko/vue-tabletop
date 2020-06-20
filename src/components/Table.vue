@@ -1,12 +1,17 @@
 <template>
   <div>
     <div id="table">
-      <component v-for="obj in objects" class="draggable" :key="obj.id" :object="obj" :is="obj.type" />
+      <component 
+        v-for="obj in objects" class="draggable"
+        :key="obj.id"
+        :object="obj"
+        :is="obj.type"
+      />
     </div>
     <SpeedDial @showImportDialog="showImportDialog = true"/>
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false"/>
+    <ContextMenu :object="selectedObject"/>
   </div>
-
 </template>
 
 <script>
@@ -17,6 +22,7 @@ import Counter from './game_objects/Counter.vue';
 
 import SpeedDial from './SpeedDial.vue';
 import ImportDialog from './overlays/ImportDialog.vue';
+import ContextMenu from './overlays/ContextMenu.vue'; 
 
 export default {
   components: {
@@ -25,7 +31,8 @@ export default {
     Container,
     Counter,
     SpeedDial,
-    ImportDialog
+    ImportDialog,
+    ContextMenu
   },
   computed: {
     objects() {
@@ -34,11 +41,15 @@ export default {
   },
   data() {
     return {
-      showImportDialog: false
+      showImportDialog: false,
+      showContextMenu: false,
+      selectedObject: null,
     }
   },
   methods: {
-
+    showContex(object) {
+      this.selectedObject = object;
+    }
   },
   mounted() {
     this.$store.dispatch("init");
@@ -53,6 +64,7 @@ export default {
     background-color: black;
   }
   .draggable {
+    position: absolute;
     touch-action: none;
   }
 </style>

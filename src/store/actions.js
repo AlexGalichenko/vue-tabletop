@@ -19,6 +19,10 @@ export default {
       store.commit('updateObject', object);
     });
 
+    socket.on('create_object', object => {
+      store.commit('createObject', object);
+    });
+
     socket.on('move_start', objectId => {
       store.commit('makeDragged', objectId);
     });
@@ -34,5 +38,9 @@ export default {
 
   moveStop(store, object) {
     socket.emit('move_stop', object);
+  },
+
+  takeFromContainer(store, objectId) {
+    socket.emit('take_container', objectId);
   }
 }

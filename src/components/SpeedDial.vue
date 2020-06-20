@@ -36,7 +36,7 @@ export default {
       const url = element.setAttribute(
         "href",
         "data:text/json;charset=utf-8," +
-        window.encodeURIComponent(JSON.stringify(this.objects))
+        window.encodeURIComponent(JSON.stringify(this.$store.state.objects))
       );
       element.setAttribute("download", "game.json");
       document.body.appendChild(element);
