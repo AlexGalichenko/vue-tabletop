@@ -23,6 +23,10 @@ export default {
       store.commit('createObject', object);
     });
 
+    socket.on('delete_object', objectId => {
+      store.commit('deleteObject', objectId);
+    });
+
     socket.on('move_start', objectId => {
       store.commit('makeDragged', objectId);
     });
@@ -42,5 +46,9 @@ export default {
 
   takeFromContainer(store, objectId) {
     socket.emit('take_container', objectId);
+  },
+
+  putObjectToContainer(store, payload) {
+    socket.emit('put_container', payload);
   }
 }

@@ -21,6 +21,11 @@ export default {
     state.objects.push(object);
   },
 
+  deleteObject(state, objectId) {
+    const index = state.objects.findIndex(obj => obj.id === objectId);
+    state.objects.splice(index, 1);
+  },
+
   makeDragged(state, objectId) {
     const currentObject = state.objects.find(obj => obj.id === objectId);
     currentObject.isDragged = true;

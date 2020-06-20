@@ -58,6 +58,16 @@ io.on('connection', socket => {
       }
     });
 
+    socket.on('put_container', payload => {
+      const container = db.objects.find(obj => obj.id === payload.containerId);
+      const objectIndex = db.objects.findIndex(obj => obj.id === payload.objectId);
+      const object = db.objects[objectIndex];
+      db.objects.splice(objectIndex, 1);
+      container.objects.push(object);
+      io.emit('update_object', container);
+      io.emit('delete_object', object.id);
+    });
+
   });
 
 });
