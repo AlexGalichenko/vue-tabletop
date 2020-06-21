@@ -9,8 +9,7 @@
     "webpack:watch:server": "webpack --mode development --config webpack.server.conf.js",
     "server": "node dist/server.js",
     "start": "npm run server",
-    "prestart": "npm run webpack:client",
-    "preprestart": "npm run webpack:server"
+    "heroku-postbuild": "npm run webpack:client && npm run webpack:server"
   },
   "keywords": [
     "tabletop",
