@@ -54,5 +54,9 @@ export default {
 
   flip(store, payload) {
     socket.emit('flip', payload);
+  },
+
+  shuffle(store, payload) {
+    socket.emit('shuffle', payload);
   }
 }

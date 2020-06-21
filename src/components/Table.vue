@@ -45,7 +45,7 @@ export default {
 
     tableStyle() {
       return {
-        'will-change': 'transform',
+        // 'will-change': 'transform',
         'transform': `translate(${this.table.x}px, ${this.table.y}px)`
       }
     }
@@ -120,6 +120,7 @@ export default {
   height: 2000px;
   width: 3000px;
   background-color: black;
+  touch-action: none;
 }
 .draggable {
   position: absolute;
