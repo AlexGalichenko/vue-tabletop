@@ -58,5 +58,13 @@ export default {
 
   shuffle(store, payload) {
     socket.emit('shuffle', payload);
+  },
+
+  increaseCount(store, payload) {
+    socket.emit('increase_count', payload);
+  },
+
+  decreaseCount(store, payload) {
+    socket.emit('decrease_count', payload);
   }
 }
