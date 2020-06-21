@@ -48,4 +48,9 @@ export default {
 </script>
 
 <style scoped>
+.actions {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
 </style>
