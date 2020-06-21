@@ -8,9 +8,7 @@
     "webpack:watch:client": "webpack --mode development --config webpack.conf.js --watch",
     "webpack:watch:server": "webpack --mode development --config webpack.server.conf.js",
     "server": "node dist/server.js",
-    "start": "npm run server",
-    "prestart": "npm run webpack:client",
-    "preprestart": "npm run webpack:server"
+    "start": "npm run server"
   },
   "keywords": [
     "tabletop",
