@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div id="table">
+  <div id="room">
+    <div id="table" :style="tableStyle">
       <component
         v-for="obj in objects"
         class="draggable"
@@ -41,13 +41,25 @@ export default {
   computed: {
     objects() {
       return this.$store.state.objects;
+    },
+
+    tableStyle() {
+      return {
+        'will-change': 'transform',
+        'transform': `translate(${this.table.x}px, ${this.table.y}px)`
+      }
     }
   },
   data() {
     return {
       showImportDialog: false,
       showContextMenu: false,
-      selectedObject: null
+      selectedObject: null,
+
+      table: {
+        x: 0,
+        y: 0
+      }
     };
   },
   methods: {
@@ -56,31 +68,47 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("init");
+    this.$store.dispatch('init');
 
     const vueThis = this;
-    interact(".container:not(.infinite)").dropzone({
+    interact('.container:not(.infinite)').dropzone({
       accept: ":not(.hand) > *",
       overlap: 0.1, //% of element
       ondragenter: function(event) {
-        event.target.classList.add("drop-target");
-        event.relatedTarget.classList.add("drop-relatedTarget");
+        event.target.classList.add('drop-target');
+        event.relatedTarget.classList.add('drop-relatedTarget');
       },
       ondragleave: function(event) {
-        event.relatedTarget.classList.remove("drop-relatedTarget");
-        event.target.classList.remove("drop-target");
+        event.relatedTarget.classList.remove('drop-relatedTarget');
+        event.target.classList.remove('drop-target');
       },
       ondrop: function(event) {
-        event.relatedTarget.classList.remove("drop-relatedTarget");
-        event.target.classList.remove("drop-target");
+        event.relatedTarget.classList.remove('drop-relatedTarget');
+        event.target.classList.remove('drop-target');
 
-        const objectId = event.relatedTarget.getAttribute("data-id");
-        const containerId = event.target.getAttribute("data-id");
+        const objectId = event.relatedTarget.getAttribute('data-id');
+        const containerId = event.target.getAttribute('data-id');
 
-        vueThis.$store.dispatch("putObjectToContainer", {
+        vueThis.$store.dispatch('putObjectToContainer', {
           objectId,
           containerId
         });
+      }
+    });
+
+    interact('#table').draggable({
+      inertia: {
+        resistance: 60
+      },
+      restrict: {
+        endOnly: false,
+        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
+      },
+      listeners: {
+        move(event) {
+          vueThis.table.x += event.dx;
+          vueThis.table.y += event.dy;
+        }
       }
     });
   }
@@ -96,5 +124,8 @@ export default {
 .draggable {
   position: absolute;
   touch-action: none;
+}
+.dragged {
+  opacity: 50%;
 }
 </style>
