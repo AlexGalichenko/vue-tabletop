@@ -68,6 +68,12 @@ io.on('connection', socket => {
       io.emit('delete_object', object.id);
     });
 
+    socket.on('flip', payload => {
+      const object = db.objects.find(obj => obj.id === payload);
+      object.isFlipped = !object.isFlipped;
+      io.emit('update_object', object);
+    });
+
   });
 
 });
