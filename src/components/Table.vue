@@ -97,4 +97,8 @@ export default {
   position: absolute;
   touch-action: none;
 }
+
+.dragged {
+  opacity: 50%;
+}
 </style>
