@@ -26,6 +26,15 @@
             <div class="md-list-item-content md-ripple">Flip</div>
           </button>
         </li>
+        <li class="md-list-item md-menu-item md-theme-demo-light">
+          <button
+            type="button"
+            class="md-list-item-button md-list-item-container md-button-clean"
+            @click="shuffle"
+          >
+            <div class="md-list-item-content md-ripple">Shuffle</div>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -59,6 +68,10 @@ export default {
 
     flip(event) {
       this.$store.dispatch("flip", this.currentObject.id);
+    },
+
+    shuffle(event) {
+      this.$store.dispatch("shuffle", this.currentObject.id);
     }
   }
 };

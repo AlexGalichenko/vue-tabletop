@@ -34,7 +34,7 @@ export default {
         'width': `${this.object.width}px`,
         'background-image': `url(${this.object.frontUrl})`,
         'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`,
       };
     },
 
@@ -45,7 +45,7 @@ export default {
         'width': `${this.object.width}px`,
         'background-image': `url(${this.object.backUrl})`,
         'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px)`
+        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`
       }
     }
   }

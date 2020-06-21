@@ -74,6 +74,12 @@ io.on('connection', socket => {
       io.emit('update_object', object);
     });
 
+    socket.on('shuffle', payload => {
+      const container = db.objects.find(obj => obj.id === payload);
+      container.objects.sort(() => 0.5 - Math.random());
+      io.emit('update_object', container);
+    });
+
   });
 
 });
