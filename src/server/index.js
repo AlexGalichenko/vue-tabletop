@@ -39,7 +39,7 @@ io.on('connection', socket => {
     socket.on('take_container', payload => {
       const container = db.objects.find(obj => obj.id === payload);
 
-      if (container.objects.length > 0) {
+      if (container.objects && container.objects.length > 0) {
         const object = container.infinite 
           ? container.objects[0]
           : container.objects.pop();
@@ -78,6 +78,18 @@ io.on('connection', socket => {
       const container = db.objects.find(obj => obj.id === payload);
       container.objects.sort(() => 0.5 - Math.random());
       io.emit('update_object', container);
+    });
+
+    socket.on('increase_count', payload => {
+      const object = db.objects.find(obj => obj.id === payload);
+      object.count++;
+      io.emit('update_object', object);
+    });
+
+    socket.on('decrease_count', payload => {
+      const object = db.objects.find(obj => obj.id === payload);
+      object.count--;
+      io.emit('update_object', object);
     });
 
   });
