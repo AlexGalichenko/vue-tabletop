@@ -42,11 +42,11 @@ export default {
 
     backStyle() {
       return {
+        'will-change': 'transform',
         'height': `${this.object.height}px`,
         'width': `${this.object.width}px`,
-        'background-image': `url(${this.object.frontUrl})`,
-        'background-size': `${this.object.columns * 100}% ${this.object.rows * 100}%`,
-        'background-position': `${((this.object.column - 1) / (this.object.columns - 1)) * 100}% ${((this.object.row - 1) / (this.object.rows - 1)) * 100}%`,
+        'background-image': `url(${this.object.backUrl})`,
+        'background-size': `100% 100%`,
         'transform': `translate(${this.object.x}px, ${this.object.y}px)`
       }
     }
@@ -55,7 +55,4 @@ export default {
 </script>
 
 <style scoped>
-  .dragged {
-    opacity: 50%;
-  }
 </style>

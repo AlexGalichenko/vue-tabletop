@@ -50,5 +50,9 @@ export default {
 
   putObjectToContainer(store, payload) {
     socket.emit('put_container', payload);
+  },
+
+  flip(store, payload) {
+    socket.emit('flip', payload);
   }
 }
