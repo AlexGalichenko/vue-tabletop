@@ -24,9 +24,11 @@ export default {
     },
 
     objectClass() {
-      const dragged = this.object.isDragged ? 'dragged' : '';
-      const infinite = this.object.infinite ? 'infinite' : '';
-      return `container ${dragged} ${infinite}`
+      return {
+        'container': true,
+        'dragged': this.object.isDragged,
+        'pinned': this.object.pinned
+      }
     },
 
     frontStyle() {
@@ -36,7 +38,8 @@ export default {
         'width': `${this.object.width}px`,
         'background-image': `url(${this.object.frontUrl})`,
         'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px)`
+        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'z-index': this.object.z
       };
     },
 

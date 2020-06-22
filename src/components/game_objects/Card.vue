@@ -24,8 +24,11 @@ export default {
     },
 
     objectClass() {
-      const dragged = this.object.isDragged ? `dragged` : '';
-      return `card ${dragged}`
+      return {
+        'card': true,
+        'dragged': this.object.isDragged,
+        'pinned': this.object.pinned
+      }
     },
 
     frontStyle() {
@@ -36,7 +39,8 @@ export default {
         'background-image': `url(${this.object.frontUrl})`,
         'background-size': `${this.object.columns * 100}% ${this.object.rows * 100}%`,
         'background-position': `${((this.object.column - 1) / (this.object.columns - 1)) * 100}% ${((this.object.row - 1) / (this.object.rows - 1)) * 100}%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`
+        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`,
+        'z-index': this.object.z
       }
     },
 
@@ -47,7 +51,8 @@ export default {
         'width': `${this.object.width}px`,
         'background-image': `url(${this.object.backUrl})`,
         'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px)`
+        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'z-index': this.object.z
       }
     }
   }

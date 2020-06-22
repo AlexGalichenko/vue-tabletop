@@ -42,7 +42,11 @@ export default {
   },
 
   moveStop(store, object) {
-    socket.emit('move_stop', object);
+    socket.emit('move_stop', {
+      id: object.id,
+      x: object.x,
+      y: object.y
+    });
   },
 
   takeFromContainer(store, objectId) {
@@ -75,5 +79,9 @@ export default {
 
   play(store, payload) {
     socket.emit('play', payload);
+  },
+
+  pin(store, payload) {
+    socket.emit('pin', payload);
   }
 }
