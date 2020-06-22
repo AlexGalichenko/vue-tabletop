@@ -10,9 +10,11 @@
         :data-id="obj.id"
       />
     </div>
+
     <SpeedDial @showImportDialog="showImportDialog = true" />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
     <ContextMenu :object="selectedObject" />
+    <Hand />
   </div>
 </template>
 
@@ -27,6 +29,7 @@ import Counter from "./game_objects/Counter.vue";
 import SpeedDial from "./SpeedDial.vue";
 import ImportDialog from "./overlays/ImportDialog.vue";
 import ContextMenu from "./overlays/ContextMenu.vue";
+import Hand from "./Hand.vue";
 
 export default {
   components: {
@@ -36,11 +39,12 @@ export default {
     Counter,
     SpeedDial,
     ImportDialog,
-    ContextMenu
+    ContextMenu,
+    Hand
   },
   computed: {
     objects() {
-      return this.$store.state.objects;
+      return this.$store.getters.tableObjects;
     },
 
     tableStyle() {
@@ -68,6 +72,8 @@ export default {
     }
   },
   mounted() {
+    window.scrollTo(0,0);
+
     this.$store.dispatch('init');
 
     const vueThis = this;
@@ -119,7 +125,7 @@ export default {
 #table {
   height: 2000px;
   width: 3000px;
-  background-color: black;
+  background-color: darkslategray;
   touch-action: none;
 }
 .draggable {
