@@ -31,6 +31,7 @@ io.on('connection', socket => {
       Object.assign(object, payload);
       object.isDragged = false;
       object.updated = Date.now();
+      object.z = Math.max(...db.objects.map(obj => obj.z)) + 1;
       io.emit('update_object', object);
     });
 
@@ -52,7 +53,7 @@ io.on('connection', socket => {
         }
         object.x = container.x + 25;
         object.y = container.y + 25;
-        object.z = 0;
+        object.z = Math.max(...db.objects.map(obj => obj.z)) + 1;
         object.owner = '';
         
         db.objects.push(object);

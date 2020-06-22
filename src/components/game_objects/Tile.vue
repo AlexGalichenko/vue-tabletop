@@ -36,6 +36,7 @@ export default {
         'background-image': `url(${this.object.frontUrl})`,
         'background-size': `100% 100%`,
         'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`,
+        'z-index': this.object.z,
       };
     },
 
@@ -46,7 +47,8 @@ export default {
         'width': `${this.object.width}px`,
         'background-image': `url(${this.object.backUrl})`,
         'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`
+        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`,
+        'z-index': this.object.z,
       }
     }
   }
