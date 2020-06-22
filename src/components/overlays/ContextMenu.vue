@@ -21,6 +21,15 @@
           <button
             type="button"
             class="md-list-item-button md-list-item-container md-button-clean"
+            @click="play"
+          >
+            <div class="md-list-item-content md-ripple">Play</div>
+          </button>
+        </li>
+        <li class="md-list-item md-menu-item md-theme-demo-light">
+          <button
+            type="button"
+            class="md-list-item-button md-list-item-container md-button-clean"
             @click="flip"
           >
             <div class="md-list-item-content md-ripple">Flip</div>
@@ -35,6 +44,29 @@
             <div class="md-list-item-content md-ripple">Shuffle</div>
           </button>
         </li>
+        <!-- Deal Buttons -->
+        <li class="md-list-item md-menu-item md-theme-demo-light">
+          <button
+            type="button"
+            class="md-list-item-button md-list-item-container md-button-clean"
+            @click="dealAll"
+          >
+            <div class="md-list-item-content md-ripple">Deal: All</div>
+          </button>
+        </li>
+        <li
+          v-for="player in players"
+          :key="player"
+          class="md-list-item md-menu-item md-theme-demo-light"
+        >
+          <button
+            type="button"
+            class="md-list-item-button md-list-item-container md-button-clean"
+            @click="deal(player)"
+          >
+            <div class="md-list-item-content md-ripple">Deal: {{player}}</div>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -43,6 +75,9 @@
 <script>
 export default {
   computed: {
+    players() {
+      return this.$store.state.players;
+    },
     currentObject() {
       return this.$store.state.currentObject;
     },
@@ -72,6 +107,22 @@ export default {
 
     shuffle(event) {
       this.$store.dispatch("shuffle", this.currentObject.id);
+    },
+
+    deal(player) {
+      this.$store.dispatch("deal", { objectId: this.currentObject.id, player });
+    },
+
+    dealAll() {},
+
+    play() {
+      this.$store.dispatch("play", {
+        objectId: this.currentObject.id,
+        position: {
+          x: 150 - this.$parent.table.x,
+          y: 150 - this.$parent.table.y
+        }
+      });
     }
   }
 };

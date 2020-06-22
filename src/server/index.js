@@ -5,6 +5,7 @@ const app = express();
 const server = require('http').Server(app);
 const io = require('socket.io')(server, { serveClient: false });
 const db = require('./db.json');
+db.players = new Set();
 
 // heroku port
 server.listen(process.env.PORT || 8000);
@@ -15,10 +16,11 @@ io.on('connection', socket => {
 
   // dispatch load when user is loaded
   socket.on('socket_connect', username => {
+    db.players.add(username);
     // emit data load to new user
     socket.emit('initial_load', db);
     // let all know that user are added
-    io.emit('new_user', username);
+    io.emit('new_user', [...db.players]);
 
     socket.on('move_start', payload => {
       io.emit('move_start', payload);
@@ -28,6 +30,7 @@ io.on('connection', socket => {
       const object = db.objects.find(obj => obj.id === payload.id);
       Object.assign(object, payload);
       object.isDragged = false;
+      object.updated = Date.now();
       io.emit('update_object', object);
     });
 
@@ -89,6 +92,22 @@ io.on('connection', socket => {
     socket.on('decrease_count', payload => {
       const object = db.objects.find(obj => obj.id === payload);
       object.count--;
+      io.emit('update_object', object);
+    });
+
+    socket.on('deal', ({objectId, player}) => {
+      const object = db.objects.find(obj => obj.id === objectId);
+      object.owner = player;
+      object.updated = Date.now();
+      io.emit('update_object', object);
+    });
+
+    socket.on('play', ({objectId, position}) => {
+      const object = db.objects.find(obj => obj.id === objectId);
+      object.owner = '';
+      object.x = position.x;
+      object.y = position.y;
+      object.updated = Date.now();
       io.emit('update_object', object);
     });
 

@@ -5,14 +5,14 @@ export default {
   init(store) {
     store.commit('updateName', window.localStorage.getItem("name"));
 
-    socket.emit('socket_connect', store.username);
+    socket.emit('socket_connect', store.state.username);
 
     socket.on('initial_load', payload => {
       store.commit('loadObjects', payload.objects);
     });
 
-    socket.on('new_user', username => {
-      store.commit('addPlayer', username);
+    socket.on('new_user', players => {
+      store.commit('addPlayers', players);
     });
 
     socket.on('update_object', object => {
@@ -30,6 +30,7 @@ export default {
     socket.on('move_start', objectId => {
       store.commit('makeDragged', objectId);
     });
+    
   },
 
   loadGame(store, game) {
@@ -66,5 +67,13 @@ export default {
 
   decreaseCount(store, payload) {
     socket.emit('decrease_count', payload);
+  },
+
+  deal(store, payload) {
+    socket.emit('deal', payload);
+  },
+
+  play(store, payload) {
+    socket.emit('play', payload);
   }
 }

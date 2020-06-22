@@ -8,8 +8,8 @@ export default {
     state.username = username;
   },
 
-  addPlayer(state, username) {
-    state.players.push(username);
+  addPlayers(state, players) {
+    state.players = players;
   },
 
   updateObject(state, object) {

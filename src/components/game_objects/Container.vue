@@ -31,6 +31,7 @@ export default {
 
     frontStyle() {
       return {
+        'will-change': 'transform',
         'height': `${this.object.height}px`,
         'width': `${this.object.width}px`,
         'background-image': `url(${this.object.frontUrl})`,
