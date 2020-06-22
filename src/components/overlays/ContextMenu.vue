@@ -39,6 +39,15 @@
           <button
             type="button"
             class="md-list-item-button md-list-item-container md-button-clean"
+            @click="pin"
+          >
+            <div class="md-list-item-content md-ripple">{{currentObject.pinned ? "Unpin": "Pin"}}</div>
+          </button>
+        </li>
+        <li class="md-list-item md-menu-item md-theme-demo-light">
+          <button
+            type="button"
+            class="md-list-item-button md-list-item-container md-button-clean"
             @click="shuffle"
           >
             <div class="md-list-item-content md-ripple">Shuffle</div>
@@ -123,7 +132,11 @@ export default {
           y: 150 - this.$parent.table.y
         }
       });
-    }
+    },
+
+    pin() {
+      this.$store.dispatch("pin", this.currentObject.id);
+    },
   }
 };
 </script>

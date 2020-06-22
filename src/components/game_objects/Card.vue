@@ -24,8 +24,11 @@ export default {
     },
 
     objectClass() {
-      const dragged = this.object.isDragged ? `dragged` : '';
-      return `card ${dragged}`
+      return {
+        'card': true,
+        'dragged': this.object.isDragged,
+        'pinned': this.object.pinned
+      }
     },
 
     frontStyle() {

@@ -28,9 +28,10 @@ io.on('connection', socket => {
 
     socket.on('move_stop', payload => {
       const object = db.objects.find(obj => obj.id === payload.id);
-      Object.assign(object, payload);
       object.isDragged = false;
       object.updated = Date.now();
+      object.x = payload.x;
+      object.y = payload.y;
       object.z = Math.max(...db.objects.map(obj => obj.z)) + 1;
       io.emit('update_object', object);
     });
@@ -45,7 +46,7 @@ io.on('connection', socket => {
 
       if (container.objects && container.objects.length > 0) {
         const object = container.infinite 
-          ? container.objects[0]
+          ? cloneDeep(container.objects[0])
           : container.objects.pop();
   
         if (container.infinite) {
@@ -109,6 +110,12 @@ io.on('connection', socket => {
       object.x = position.x;
       object.y = position.y;
       object.updated = Date.now();
+      io.emit('update_object', object);
+    });
+
+    socket.on('pin', objectId => {
+      const object = db.objects.find(obj => obj.id === objectId);
+      object.pinned = !object.pinned;
       io.emit('update_object', object);
     });
 

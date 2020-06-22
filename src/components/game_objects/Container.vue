@@ -24,9 +24,11 @@ export default {
     },
 
     objectClass() {
-      const dragged = this.object.isDragged ? 'dragged' : '';
-      const infinite = this.object.infinite ? 'infinite' : '';
-      return `container ${dragged} ${infinite}`
+      return {
+        'container': true,
+        'dragged': this.object.isDragged,
+        'pinned': this.object.pinned
+      }
     },
 
     frontStyle() {

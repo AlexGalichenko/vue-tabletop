@@ -24,8 +24,11 @@ export default {
     },
 
     objectClass() {
-      const dragged = this.object.isDragged ? `dragged` : ''
-      return `tile ${dragged}`
+      return {
+        'tile': true,
+        'dragged': this.object.isDragged,
+        'pinned': this.object.pinned
+      }
     },
 
     frontStyle() {

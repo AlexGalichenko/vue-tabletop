@@ -1,5 +1,8 @@
 <template>
-  <div :class="objectClass" :style="style">
+  <div 
+    :class="objectClass" :style="style"
+    @click.right.prevent="showContextMenu"
+  >
     <div @click="decreaseCount" class="minus">-</div>
     <div class="value">{{object.count}}</div>
     <div @click="increaseCount" class="plus">+</div>
@@ -20,8 +23,11 @@ export default {
   ],
   computed: {
     objectClass() {
-      const dragged = this.object.isDragged ? `dragged` : '';
-      return `counter ${dragged}`
+      return {
+        'counter': true,
+        'dragged': this.object.isDragged,
+        'pinned': this.object.pinned
+      }
     },
 
     style() {
