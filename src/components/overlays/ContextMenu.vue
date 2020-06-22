@@ -8,72 +8,45 @@
   >
     <div class="md-menu-content-container md-scrollbar md-theme-default">
       <ul class="md-list md-theme-default">
-        <li class="md-list-item md-menu-item md-theme-demo-light">
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="take"
-          >
-            <div class="md-list-item-content md-ripple">Take</div>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="take">
+            <div :class="divClass">Take</div>
           </button>
         </li>
-        <li class="md-list-item md-menu-item md-theme-demo-light">
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="play"
-          >
-            <div class="md-list-item-content md-ripple">Play</div>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="play">
+            <div :class="divClass">Play</div>
           </button>
         </li>
-        <li class="md-list-item md-menu-item md-theme-demo-light">
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="flip"
-          >
-            <div class="md-list-item-content md-ripple">Flip</div>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="flip">
+            <div :class="divClass">Flip</div>
           </button>
         </li>
-        <li class="md-list-item md-menu-item md-theme-demo-light">
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="pin"
-          >
-            <div class="md-list-item-content md-ripple">{{currentObject.pinned ? "Unpin": "Pin"}}</div>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="pin">
+            <div :class="divClass">{{currentObject.pinned ? "Unpin": "Pin"}}</div>
           </button>
         </li>
-        <li class="md-list-item md-menu-item md-theme-demo-light">
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="shuffle"
-          >
-            <div class="md-list-item-content md-ripple">Shuffle</div>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="shuffle">
+            <div :class="divClass">Shuffle</div>
+          </button>
+        </li>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="deleteObject">
+            <div :class="divClass">Delete</div>
           </button>
         </li>
         <!-- Deal Buttons -->
-        <li class="md-list-item md-menu-item md-theme-demo-light">
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="dealAll"
-          >
-            <div class="md-list-item-content md-ripple">Deal: All</div>
+        <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="dealAll">
+            <div :class="divClass">Deal: All</div>
           </button>
         </li>
-        <li
-          v-for="player in players"
-          :key="player"
-          class="md-list-item md-menu-item md-theme-demo-light"
-        >
-          <button
-            type="button"
-            class="md-list-item-button md-list-item-container md-button-clean"
-            @click="deal(player)"
-          >
-            <div class="md-list-item-content md-ripple">Deal: {{player}}</div>
+        <li v-for="player in players" :key="player" :class="liClass">
+          <button type="button" :class="buttonClass" @click="deal(player)">
+            <div :class="divClass">Deal: {{player}}</div>
           </button>
         </li>
       </ul>
@@ -100,6 +73,13 @@ export default {
         left: `${this.$store.state.contextMenu.x - 10}px`
       };
     }
+  },
+  data() {
+    return {
+      liClass: "md-list-item md-menu-item md-theme-demo-light",
+      buttonClass: "md-list-item-button md-list-item-container md-button-clean",
+      divClass: "md-list-item-content md-ripple"
+    };
   },
   methods: {
     hideContextMenu() {
@@ -137,6 +117,10 @@ export default {
     pin() {
       this.$store.dispatch("pin", this.currentObject.id);
     },
+
+    deleteObject() {
+      this.$store.dispatch("deleteObject", this.currentObject.id);
+    }
   }
 };
 </script>

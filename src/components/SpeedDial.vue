@@ -11,7 +11,7 @@
       <md-button class="md-icon-button">
         <i class="fas fa-door-closed" />
       </md-button>
-      <md-button class="md-icon-button">
+      <md-button class="md-icon-button"  @click="$emit('showCreateDialog')">
         <i class="fas fa-plus-circle" />
       </md-button>
       <md-button class="md-icon-button">
@@ -32,13 +32,13 @@ export default {
   components: {},
   methods: {
     saveGame() {
-      const element = document.createElement("a");
+      const element = document.createElement('a');
       const url = element.setAttribute(
-        "href",
-        "data:text/json;charset=utf-8," +
+        'href',
+        'data:text/json;charset=utf-8,' +
         window.encodeURIComponent(JSON.stringify(this.$store.state.objects))
       );
-      element.setAttribute("download", "game.json");
+      element.setAttribute('download', 'game.json');
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
