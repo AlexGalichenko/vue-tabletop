@@ -11,25 +11,30 @@
       />
     </div>
 
-    <SpeedDial @showImportDialog="showImportDialog = true" />
+    <SpeedDial
+      @showImportDialog="showImportDialog = true"
+      @showCreateDialog="showCreateDialog = true" 
+    />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
+    <CreateDialog :showDialog="showCreateDialog" @closeDialog="showCreateDialog = false" />
     <ContextMenu :object="selectedObject" />
     <Hand />
   </div>
 </template>
 
 <script>
-import interact from "interactjs";
+import interact from 'interactjs';
 
-import Card from "./game_objects/Card.vue";
-import Tile from "./game_objects/Tile.vue";
-import Container from "./game_objects/Container.vue";
-import Counter from "./game_objects/Counter.vue";
+import Card from './game_objects/Card.vue';
+import Tile from './game_objects/Tile.vue';
+import Container from './game_objects/Container.vue';
+import Counter from './game_objects/Counter.vue';
 
-import SpeedDial from "./SpeedDial.vue";
-import ImportDialog from "./overlays/ImportDialog.vue";
-import ContextMenu from "./overlays/ContextMenu.vue";
-import Hand from "./Hand.vue";
+import SpeedDial from './SpeedDial.vue';
+import ImportDialog from './overlays/ImportDialog.vue';
+import CreateDialog from './overlays/CreateDialog.vue';
+import ContextMenu from './overlays/ContextMenu.vue';
+import Hand from './Hand.vue';
 
 export default {
   components: {
@@ -39,6 +44,7 @@ export default {
     Counter,
     SpeedDial,
     ImportDialog,
+    CreateDialog,
     ContextMenu,
     Hand
   },
@@ -49,7 +55,7 @@ export default {
 
     tableStyle() {
       return {
-        // 'will-change': 'transform',
+        'will-change': 'transform',
         'transform': `translate(${this.table.x}px, ${this.table.y}px)`
       }
     }
@@ -57,6 +63,7 @@ export default {
   data() {
     return {
       showImportDialog: false,
+      showCreateDialog: false,
       showContextMenu: false,
       selectedObject: null,
 

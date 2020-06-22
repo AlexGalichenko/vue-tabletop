@@ -30,14 +30,14 @@ export default {
     socket.on('move_start', objectId => {
       store.commit('makeDragged', objectId);
     });
-    
+
   },
 
   loadGame(store, game) {
     socket.emit('load_game', game);
   },
 
-  moveStart(store, object ) {
+  moveStart(store, object) {
     socket.emit('move_start', object.id);
   },
 
@@ -83,5 +83,20 @@ export default {
 
   pin(store, payload) {
     socket.emit('pin', payload);
+  },
+
+  deleteObject(store, payload) {
+    socket.emit('delete', payload);
+  },
+
+  createObject(store, { frontUrl, backUrl, type, rows, columns, x, y, height, width, scale, infinite, edges }) {
+    switch (type) {
+      case 'Deck': socket.emit('create_deck', { type, frontUrl, backUrl, rows, columns, x, y, height, width, scale }); break;
+      case 'Container': socket.emit('create_container', { type, frontUrl, backUrl, x, y, height, width, scale, infinite }); break;
+      case 'Tile': socket.emit('create_tile', { type, frontUrl, backUrl, x, y, height, width, scale }); break;
+      case 'Counter': socket.emit('create_counter', { type, x, y, scale }); break;
+      case 'Dice': socket.emit('create_dice', { type, x, y, scale, edges }); break;
+    }
+
   }
 }
