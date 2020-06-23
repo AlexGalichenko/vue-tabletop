@@ -1,15 +1,20 @@
 <template>
   <div id="preview" v-if="showPreview">
-    <Card :object="currentObject"/>
+    <component 
+      :object="currentObject"
+      :is="currentObject.type"
+    />
   </div>
 </template>
 
 <script>
 import Card from './game_objects/PreviewCard.vue';
+import Tile from './game_objects/PreviewTile.vue';
 
 export default {
   components: {
-    Card
+    Card,
+    Tile
   },
   computed: {
     currentObject() {

@@ -13,6 +13,5 @@ export default {
 <style>
 body {
   overflow: hidden;
-  background: black;
 }
 </style>

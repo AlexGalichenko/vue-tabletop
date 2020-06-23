@@ -3,17 +3,22 @@
     :style="style"
     :class="objectClass"
     @click.right.prevent="showContextMenu"
+    @mousedown.alt.prevent.exact="showPreview"
+    @mouseup.prevent="hidePreview"
   />
 </template>
 
 <script>
 import Draggable from '../mixins/Draggable.js';
 import HasContextMenu from '../mixins/HasContextMenu.js';
+import HasPreview from '../mixins/HasPreview.js';
+import { frontTileStyle, backTileStyle } from '../utils/styles.js';
 
 export default {
   mixins: [
     Draggable,
-    HasContextMenu
+    HasContextMenu,
+    HasPreview
   ],
   props: {
     object: Object
@@ -32,27 +37,11 @@ export default {
     },
 
     frontStyle() {
-      return {
-        'will-change': 'transform',
-        'height': `${this.object.height}px`,
-        'width': `${this.object.width}px`,
-        'background-image': `url(${this.object.frontUrl})`,
-        'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`,
-        'z-index': this.object.z,
-      };
+      return frontTileStyle(this.object)
     },
 
     backStyle() {
-      return {
-        'will-change': 'transform',
-        'height': `${this.object.height}px`,
-        'width': `${this.object.width}px`,
-        'background-image': `url(${this.object.backUrl})`,
-        'background-size': `100% 100%`,
-        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`,
-        'z-index': this.object.z,
-      }
+      return backTileStyle(this.object)
     }
   }
 };
