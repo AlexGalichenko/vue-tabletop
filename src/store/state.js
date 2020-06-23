@@ -6,5 +6,6 @@ export default {
   contextMenu: {
     show: false
   },
+  showPreview: false,
   currentObject: null,
 }
