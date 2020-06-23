@@ -1,6 +1,8 @@
 <template>
   <div id="room">
-    <div id="table" :style="tableStyle">
+    <div id="table"
+    :style="tableStyle"
+    >
       <component
         v-for="obj in objects"
         class="draggable"
@@ -17,8 +19,9 @@
     />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
     <CreateDialog :showDialog="showCreateDialog" @closeDialog="showCreateDialog = false" />
-    <ContextMenu :object="selectedObject" />
+    <ContextMenu />
     <Hand />
+    <Preview />
   </div>
 </template>
 
@@ -35,6 +38,7 @@ import ImportDialog from './overlays/ImportDialog.vue';
 import CreateDialog from './overlays/CreateDialog.vue';
 import ContextMenu from './overlays/ContextMenu.vue';
 import Hand from './Hand.vue';
+import Preview from './Preview.vue';
 
 export default {
   components: {
@@ -46,7 +50,8 @@ export default {
     ImportDialog,
     CreateDialog,
     ContextMenu,
-    Hand
+    Hand,
+    Preview
   },
   computed: {
     objects() {
@@ -72,11 +77,6 @@ export default {
         y: 0
       }
     };
-  },
-  methods: {
-    showContex(object) {
-      this.selectedObject = object;
-    }
   },
   mounted() {
     window.scrollTo(0,0);

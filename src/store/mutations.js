@@ -53,4 +53,11 @@ export default {
     state.currentObject = object;
   },
 
+  showPreview(state) {
+    state.showPreview = true;
+  },
+
+  hidePreview(state) {
+    state.showPreview = false;
+  }
 }
