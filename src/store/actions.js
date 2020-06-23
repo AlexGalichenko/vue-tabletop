@@ -77,6 +77,10 @@ export default {
     socket.emit('deal', payload);
   },
 
+  dealFromContainer(store, payload) {
+    socket.emit('deal_container', payload);
+  },
+
   play(store, payload) {
     socket.emit('play', payload);
   },

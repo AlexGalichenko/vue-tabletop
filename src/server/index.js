@@ -105,6 +105,27 @@ io.on('connection', socket => {
       io.emit('update_object', object);
     });
 
+    socket.on('deal_container', ({objectId, player}) => {
+      const container = getObject(db, objectId);
+      if (container.objects && container.objects.length > 0) {
+        const object = container.infinite 
+          ? cloneDeep(container.objects[0])
+          : container.objects.pop();
+  
+        if (container.infinite) {
+          object.id = uniqid();
+        }
+        object.x = container.x + 25;
+        object.y = container.y + 25;
+        object.z = getZ(db);
+        object.owner = player;
+        
+        db.objects.push(object);
+        io.emit('update_object', container);
+        io.emit('create_object', object);
+      }
+    });
+
     socket.on('play', ({objectId, position}) => {
       const object = getObject(db, objectId);
       object.owner = '';
