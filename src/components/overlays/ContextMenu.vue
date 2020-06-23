@@ -99,10 +99,18 @@ export default {
     },
 
     deal(player) {
-      this.$store.dispatch("deal", { objectId: this.currentObject.id, player });
+      if (this.currentObject.type === 'Container') {
+        this.$store.dispatch("dealFromContainer", { objectId: this.currentObject.id, player });
+      } else {
+        this.$store.dispatch("deal", { objectId: this.currentObject.id, player });
+      }
     },
 
-    dealAll() {},
+    dealAll() {
+      this.players.forEach(player => {
+        this.$store.dispatch("dealFromContainer", { objectId: this.currentObject.id, player });
+      })
+    },
 
     play() {
       this.$store.dispatch("play", {

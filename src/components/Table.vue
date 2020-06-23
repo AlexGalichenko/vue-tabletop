@@ -61,7 +61,7 @@ export default {
     tableStyle() {
       return {
         'will-change': 'transform',
-        'transform': `translate(${this.table.x}px, ${this.table.y}px)`
+        'transform': `translate(${this.table.x}px, ${this.table.y}px) translateZ(0)`
       }
     }
   },
