@@ -17,10 +17,11 @@
       @showImportDialog="showImportDialog = true"
       @showCreateDialog="showCreateDialog = true" 
     />
+    <Hand />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
     <CreateDialog :showDialog="showCreateDialog" @closeDialog="showCreateDialog = false" />
-    <ContextMenu />
-    <Hand />
+    <SearchDialog :showDialog="showSearchDialog" @closeDialog="showSearchDialog = false" />
+    <ContextMenu @showSearchDialog="showSearchDialog = true"/>
     <Preview />
   </div>
 </template>
@@ -36,6 +37,7 @@ import Counter from './game_objects/Counter.vue';
 import SpeedDial from './SpeedDial.vue';
 import ImportDialog from './overlays/ImportDialog.vue';
 import CreateDialog from './overlays/CreateDialog.vue';
+import SearchDialog from './overlays/SearchDialog.vue';
 import ContextMenu from './overlays/ContextMenu.vue';
 import Hand from './Hand.vue';
 import Preview from './Preview.vue';
@@ -49,6 +51,7 @@ export default {
     SpeedDial,
     ImportDialog,
     CreateDialog,
+    SearchDialog,
     ContextMenu,
     Hand,
     Preview
@@ -69,6 +72,7 @@ export default {
     return {
       showImportDialog: false,
       showCreateDialog: false,
+      showSearchDialog: false,
       showContextMenu: false,
       selectedObject: null,
 

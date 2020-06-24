@@ -9,6 +9,11 @@
     <div class="md-menu-content-container md-scrollbar md-theme-default">
       <ul class="md-list md-theme-default">
         <li :class="liClass" v-show="container">
+          <button type="button" :class="buttonClass" @click="$emit('showSearchDialog')">
+            <div :class="divClass">Search</div>
+          </button>
+        </li>
+        <li :class="liClass" v-show="container">
           <button type="button" :class="buttonClass" @click="take">
             <div :class="divClass">Take</div>
           </button>
@@ -44,7 +49,7 @@
             <div :class="divClass">Deal: All</div>
           </button>
         </li>
-        <li v-for="player in players" :key="player" :class="liClass" v-show="['Card', 'Tile'].includes(currentObject.type)">
+        <li v-for="player in players" :key="player" :class="liClass" v-show="['Card', 'Tile', 'Container'].includes(currentObject.type)">
           <button type="button" :class="buttonClass" @click="deal(player)">
             <div :class="divClass">Deal: {{player}}</div>
           </button>
