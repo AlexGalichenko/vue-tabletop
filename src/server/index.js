@@ -64,6 +64,27 @@ io.on('connection', socket => {
       }
     });
 
+    socket.on('take_container_by_id', ({containerId, index}) => {
+      const container = getObject(db, containerId);
+
+      if (container.objects && container.objects.length > 0) {
+        const object = cloneDeep(container.objects[index])
+        if (container.infinite) {
+          object.id = uniqid();
+        } else {
+          container.objects.splice(index, 1);
+        }
+        object.x = container.x + 25;
+        object.y = container.y + 25;
+        object.z = getZ(db);
+        object.owner = '';
+        
+        db.objects.push(object);
+        io.emit('update_object', container);
+        io.emit('create_object', object);
+      }
+    });
+
     socket.on('put_container', payload => {
       const container = getObject(db, payload.containerId);
       const objectIndex = getObjectIndex(db, payload.objectId);
@@ -115,9 +136,23 @@ io.on('connection', socket => {
         if (container.infinite) {
           object.id = uniqid();
         }
-        object.x = container.x + 25;
-        object.y = container.y + 25;
-        object.z = getZ(db);
+        object.owner = player;
+        
+        db.objects.push(object);
+        io.emit('update_object', container);
+        io.emit('create_object', object);
+      }
+    });
+
+    socket.on('deal_container_by_id', ({containerId, index, player}) => {
+      const container = getObject(db, containerId);
+      if (container.objects && container.objects.length > 0) {
+        const object = cloneDeep(container.objects[index])
+        if (container.infinite) {
+          object.id = uniqid();
+        } else {
+          container.objects.splice(index, 1);
+        }
         object.owner = player;
         
         db.objects.push(object);

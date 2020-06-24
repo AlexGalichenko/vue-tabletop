@@ -17,10 +17,16 @@
       @showImportDialog="showImportDialog = true"
       @showCreateDialog="showCreateDialog = true" 
     />
+    <Hand />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
     <CreateDialog :showDialog="showCreateDialog" @closeDialog="showCreateDialog = false" />
-    <ContextMenu />
-    <Hand />
+    <SearchDialog :showDialog="showSearchDialog" @closeDialog="showSearchDialog = false" />
+
+      <component
+      :is="$store.state.contextMenu.type"
+      @showSearchDialog="showSearchDialog = true"
+      />
+    <!-- <ContextMenu @showSearchDialog="showSearchDialog = true"/> -->
     <Preview />
   </div>
 </template>
@@ -28,15 +34,17 @@
 <script>
 import interact from 'interactjs';
 
-import Card from './game_objects/Card.vue';
-import Tile from './game_objects/Tile.vue';
-import Container from './game_objects/Container.vue';
-import Counter from './game_objects/Counter.vue';
+import Card from './game_objects/TableCard.vue';
+import Tile from './game_objects/TableTile.vue';
+import Container from './game_objects/TableContainer.vue';
+import Counter from './game_objects/TableCounter.vue';
 
 import SpeedDial from './SpeedDial.vue';
 import ImportDialog from './overlays/ImportDialog.vue';
 import CreateDialog from './overlays/CreateDialog.vue';
+import SearchDialog from './overlays/SearchDialog.vue';
 import ContextMenu from './overlays/ContextMenu.vue';
+import SearchContextMenu from './overlays/SearchContextMenu.vue';
 import Hand from './Hand.vue';
 import Preview from './Preview.vue';
 
@@ -49,7 +57,9 @@ export default {
     SpeedDial,
     ImportDialog,
     CreateDialog,
+    SearchDialog,
     ContextMenu,
+    SearchContextMenu,
     Hand,
     Preview
   },
@@ -69,6 +79,7 @@ export default {
     return {
       showImportDialog: false,
       showCreateDialog: false,
+      showSearchDialog: false,
       showContextMenu: false,
       selectedObject: null,
 
@@ -138,6 +149,7 @@ export default {
 .draggable {
   position: absolute;
   touch-action: none;
+  will-change: transform, opacity;
 }
 .dragged {
   opacity: 50%;

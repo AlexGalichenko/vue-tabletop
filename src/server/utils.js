@@ -7,5 +7,5 @@ export function getObjectIndex(db, id) {
 }
 
 export function getZ(db) {
-  return Math.max(...db.objects.map(obj => obj.z)) + 1
+  return Math.max(...db.objects.map(obj => obj.z || 0)) + 1
 }

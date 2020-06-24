@@ -9,17 +9,7 @@
 </template>
 
 <script>
-import Draggable from '../mixins/Draggable.js';
-import HasContextMenu from '../mixins/HasContextMenu.js';
-import HasPreview from '../mixins/HasPreview.js';
-import { frontTileStyle, backTileStyle } from '../utils/styles.js';
-
 export default {
-  mixins: [
-    Draggable,
-    HasContextMenu,
-    HasPreview
-  ],
   props: {
     object: Object
   },
@@ -37,18 +27,20 @@ export default {
     },
 
     frontStyle() {
-      return frontTileStyle(this.object)
+      return tableFrontTileStyle(this.object)
     },
 
     backStyle() {
-      return backTileStyle(this.object)
+      return tableBackTileStyle(this.object)
     }
+  },
+  methods: {
+    showContextMenu() {},
+    showPreview() {},
+    hidePreview() {}
   }
 };
 </script>
 
 <style scoped>
-  .dragged {
-    opacity: 50%;
-  }
 </style>

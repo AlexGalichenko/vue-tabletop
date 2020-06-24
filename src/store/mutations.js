@@ -38,10 +38,10 @@ export default {
     currentObject.z += 0;
   },
 
-  showContextMenu(state, position) {
+  showContextMenu(state, menuData) {
     state.contextMenu = {
       show: true,
-      ...position
+      ...menuData
     };
   },
 
@@ -51,6 +51,10 @@ export default {
 
   setCurrentObject(state, object) {
     state.currentObject = object;
+  },
+
+  setSearchSelectedIndexObject(state, {object, index}) {
+    state.searchCurrentObject = {object, index}
   },
 
   showPreview(state) {

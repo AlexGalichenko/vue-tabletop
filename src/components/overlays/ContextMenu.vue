@@ -1,13 +1,19 @@
 <template>
   <div
     v-if="showContextMenu"
-    class="md-menu-content-bottom-start md-menu-content-big md-menu-content md-theme-default"
+    :class="menuClass"
     x-placement="bottom-start"
+    id="context-menu"
     :style="menuStyle"
     @mouseleave="hideContextMenu"
   >
     <div class="md-menu-content-container md-scrollbar md-theme-default">
       <ul class="md-list md-theme-default">
+        <li :class="liClass" v-show="container">
+          <button type="button" :class="buttonClass" @click="$emit('showSearchDialog')">
+            <div :class="divClass">Search</div>
+          </button>
+        </li>
         <li :class="liClass" v-show="container">
           <button type="button" :class="buttonClass" @click="take">
             <div :class="divClass">Take</div>
@@ -44,7 +50,7 @@
             <div :class="divClass">Deal: All</div>
           </button>
         </li>
-        <li v-for="player in players" :key="player" :class="liClass" v-show="['Card', 'Tile'].includes(currentObject.type)">
+        <li v-for="player in players" :key="player" :class="liClass" v-show="['Card', 'Tile', 'Container'].includes(currentObject.type)">
           <button type="button" :class="buttonClass" @click="deal(player)">
             <div :class="divClass">Deal: {{player}}</div>
           </button>
@@ -55,7 +61,10 @@
 </template>
 
 <script>
+import ContextMenu from './BaseContextMenu.vue';
+
 export default {
+  extends: ContextMenu,
   computed: {
     container() {
       return this.currentObject.type === 'Container'
@@ -68,30 +77,9 @@ export default {
     },
     currentObject() {
       return this.$store.state.currentObject;
-    },
-    showContextMenu() {
-      return this.$store.state.contextMenu.show;
-    },
-    menuStyle() {
-      return {
-        position: "absolute",
-        top: `${this.$store.state.contextMenu.y - 10}px`,
-        left: `${this.$store.state.contextMenu.x - 10}px`
-      };
     }
   },
-  data() {
-    return {
-      liClass: "md-list-item md-menu-item md-theme-demo-light",
-      buttonClass: "md-list-item-button md-list-item-container md-button-clean",
-      divClass: "md-list-item-content md-ripple"
-    };
-  },
   methods: {
-    hideContextMenu() {
-      this.$store.commit("hideContextMenu");
-    },
-
     take(event) {
       this.$store.dispatch("takeFromContainer", this.currentObject.id);
     },
@@ -138,12 +126,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.md-list-item {
-  cursor: pointer;
-}
-.md-list-item.md-menu-item.md-theme-demo-light:active {
-  background-color: gray;
-}
-</style>

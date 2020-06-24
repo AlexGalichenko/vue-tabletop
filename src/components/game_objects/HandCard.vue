@@ -1,5 +1,5 @@
 <script>
-import Card from './Card.vue';
+import Card from './BaseCard.vue';
 import HasContextMenu from '../mixins/HasContextMenu.js';
 
 import { frontCardStyle, backCardStyle } from '../utils/styles.js';

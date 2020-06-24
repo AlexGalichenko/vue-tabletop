@@ -10,17 +10,10 @@
 </template>
 
 <script>
-import Draggable from '../mixins/Draggable.js';
-import HasContextMenu from '../mixins/HasContextMenu.js';
-
 export default {
   props: {
     object: Object
   },
-  mixins: [
-    Draggable,
-    HasContextMenu
-  ],
   computed: {
     objectClass() {
       return {
@@ -31,19 +24,13 @@ export default {
     },
 
     style() {
-      return {
-        'will-change': 'transform',
-        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`
-      }
-    },
+      return {}
+    }
   },
   methods: {
-    increaseCount() {
-      this.$store.dispatch('increaseCount', this.object.id);
-    },
-    decreaseCount() {
-      this.$store.dispatch('decreaseCount', this.object.id);
-    }
+    increaseCount() {},
+    decreaseCount() {},
+    showContextMenu() {}
   }
 };
 </script>

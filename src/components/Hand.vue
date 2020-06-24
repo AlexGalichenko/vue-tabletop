@@ -16,9 +16,9 @@
 
 <script>
 import Card from "./game_objects/HandCard.vue";
-import Tile from "./game_objects/Tile.vue";
-import Container from "./game_objects/Container.vue";
-import Counter from "./game_objects/Counter.vue";
+import Tile from "./game_objects/HandTile.vue";
+import Container from "./game_objects/HandContainer.vue";
+import Counter from "./game_objects/BaseCounter.vue";
 
 export default {
   components: {
