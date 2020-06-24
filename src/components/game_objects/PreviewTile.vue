@@ -1,17 +1,10 @@
 <script>
-import Tile from './Tile.vue';
+import Tile from './BaseTile.vue';
 import { previewFrontTileStyle, previewBackTileStyle } from '../utils/styles.js';
 
 export default {
   extends: Tile,
-  mixins: [],
   computed: {
-    objectClass() {
-      return {
-        'tile': true
-      }
-    },
-
     frontStyle() {
       return previewFrontTileStyle(this.object)
     },

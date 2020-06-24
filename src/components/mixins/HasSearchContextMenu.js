@@ -1,9 +1,9 @@
 export default {
   methods: {
     showContextMenu(event) {
-      this.$store.commit('setCurrentObject', this.object);
+      this.$store.commit('setSearchSelectedIndexObject', {object: this.$store.state.currentObject, index: this.index});
       this.$store.commit('showContextMenu', {
-        type: 'ContextMenu',
+        type: 'SearchContextMenu',
         x: window.pageXOffset + event.x,
         y: window.pageYOffset + event.y
       });

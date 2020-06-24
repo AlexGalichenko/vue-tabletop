@@ -53,6 +53,10 @@ export default {
     socket.emit('take_container', objectId);
   },
 
+  takeFromContainerById(store, payload) {
+    socket.emit('take_container_by_id', payload);
+  },
+
   putObjectToContainer(store, payload) {
     socket.emit('put_container', payload);
   },
@@ -79,6 +83,10 @@ export default {
 
   dealFromContainer(store, payload) {
     socket.emit('deal_container', payload);
+  },
+
+  dealFromContainerById(store, payload) {
+    socket.emit('deal_container_by_id', payload);
   },
 
   play(store, payload) {
