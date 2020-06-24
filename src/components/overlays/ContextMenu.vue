@@ -145,4 +145,10 @@ export default {
 </script>
 
 <style scoped>
+.md-list-item {
+  cursor: pointer;
+}
+.md-list-item.md-menu-item.md-theme-demo-light:active {
+  background-color: gray;
+}
 </style>

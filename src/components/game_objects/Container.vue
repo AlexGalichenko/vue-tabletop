@@ -3,7 +3,9 @@
     :style="style"
     :class="objectClass"
     @click.right.prevent="showContextMenu"
-  />
+  >
+  <div class="count">{{count}}</div>
+  </div>
 </template>
 
 <script>
@@ -44,14 +46,30 @@ export default {
     },
 
     backStyle() {
-      return {};
+      return {
+        'will-change': 'transform',
+        'height': `${this.object.height}px`,
+        'width': `${this.object.width}px`,
+        'background-image': `url(${this.object.frontUrl})`,
+        'background-size': `100% 100%`,
+        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'z-index': this.object.z
+      };
+    },
+
+    count() {
+      return this.object.infinite ? '\u221E' : this.object.objects.length
     }
   }
 };
 </script>
 
 <style scoped>
-  .dragged {
-    opacity: 50%;
+  .count {
+    width: 25px;
+    height: 25px;
+    top: 0;
+    left: 0;
+    background-color: gray;
   }
 </style>
