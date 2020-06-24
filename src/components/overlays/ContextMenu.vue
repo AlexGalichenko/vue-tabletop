@@ -8,17 +8,17 @@
   >
     <div class="md-menu-content-container md-scrollbar md-theme-default">
       <ul class="md-list md-theme-default">
-        <li :class="liClass">
+        <li :class="liClass" v-show="container">
           <button type="button" :class="buttonClass" @click="take">
             <div :class="divClass">Take</div>
           </button>
         </li>
-        <li :class="liClass">
+        <li :class="liClass" v-show="onHand">
           <button type="button" :class="buttonClass" @click="play">
             <div :class="divClass">Play</div>
           </button>
         </li>
-        <li :class="liClass">
+        <li :class="liClass" v-show="['Card', 'Tile'].includes(currentObject.type)">
           <button type="button" :class="buttonClass" @click="flip">
             <div :class="divClass">Flip</div>
           </button>
@@ -28,7 +28,7 @@
             <div :class="divClass">{{currentObject.pinned ? "Unpin": "Pin"}}</div>
           </button>
         </li>
-        <li :class="liClass">
+        <li :class="liClass" v-show="container">
           <button type="button" :class="buttonClass" @click="shuffle">
             <div :class="divClass">Shuffle</div>
           </button>
@@ -39,12 +39,12 @@
           </button>
         </li>
         <!-- Deal Buttons -->
-        <li :class="liClass">
+        <li :class="liClass" v-show="container">
           <button type="button" :class="buttonClass" @click="dealAll">
             <div :class="divClass">Deal: All</div>
           </button>
         </li>
-        <li v-for="player in players" :key="player" :class="liClass">
+        <li v-for="player in players" :key="player" :class="liClass" v-show="['Card', 'Tile'].includes(currentObject.type)">
           <button type="button" :class="buttonClass" @click="deal(player)">
             <div :class="divClass">Deal: {{player}}</div>
           </button>
@@ -57,6 +57,12 @@
 <script>
 export default {
   computed: {
+    container() {
+      return this.currentObject.type === 'Container'
+    },
+    onHand() {
+      return this.currentObject.owner && this.currentObject.owner !== ''
+    },
     players() {
       return this.$store.state.players;
     },
