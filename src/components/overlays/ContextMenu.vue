@@ -110,8 +110,8 @@ export default {
       this.$store.dispatch("play", {
         objectId: this.currentObject.id,
         position: {
-          x: 150 - this.$parent.table.x,
-          y: 150 - this.$parent.table.y
+          x: ((window.scrollX + window.innerWidth / 2) - this.$parent.table.x) / this.$store.state.zoom,
+          y: ((window.scrollY + window.innerHeight / 2) - this.$parent.table.y) / this.$store.state.zoom
         }
       });
     },

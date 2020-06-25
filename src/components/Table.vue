@@ -1,7 +1,8 @@
 <template>
   <div id="room">
     <div id="table"
-    :style="tableStyle"
+      :style="tableStyle"
+      @mousewheel.prevent="changeZoom"
     >
       <component
         v-for="obj in objects"
@@ -26,7 +27,6 @@
       :is="$store.state.contextMenu.type"
       @showSearchDialog="showSearchDialog = true"
       />
-    <!-- <ContextMenu @showSearchDialog="showSearchDialog = true"/> -->
     <Preview />
   </div>
 </template>
@@ -70,8 +70,8 @@ export default {
 
     tableStyle() {
       return {
-        'will-change': 'transform',
-        'transform': `translate(${this.table.x}px, ${this.table.y}px) translateZ(0)`
+        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom}) translateZ(0)`,
+        'transform-origin': '0 0'
       }
     }
   },
@@ -89,7 +89,13 @@ export default {
       }
     };
   },
+  methods: {
+    changeZoom(event) {
+      this.$store.commit("changeZoom", event.deltaY / 1000)
+    }
+  },
   mounted() {
+    console.log('mounted')
     window.scrollTo(0,0);
 
     this.$store.dispatch('init');
@@ -145,6 +151,7 @@ export default {
   width: 3000px;
   background-color: darkslategray;
   touch-action: none;
+  will-change: transform;
 }
 .draggable {
   position: absolute;

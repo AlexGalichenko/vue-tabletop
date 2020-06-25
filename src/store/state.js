@@ -8,4 +8,9 @@ export default {
   },
   showPreview: false,
   currentObject: null,
+  zoom: 1,
+  camera: {
+    x: 0,
+    y: 0
+  }
 }

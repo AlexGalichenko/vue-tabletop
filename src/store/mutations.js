@@ -33,8 +33,8 @@ export default {
 
   move(state, { event, object }) {
     const currentObject = state.objects.find(obj => obj.id === object.id);
-    currentObject.x += event.dx;
-    currentObject.y += event.dy;
+    currentObject.x += event.dx / state.zoom;
+    currentObject.y += event.dy / state.zoom;
     currentObject.z += 0;
   },
 
@@ -63,5 +63,14 @@ export default {
 
   hidePreview(state) {
     state.showPreview = false;
+  },
+
+  changeZoom(state, delta) {
+    if (state.zoom - delta >= 0.5 && state.zoom - delta <= 2) state.zoom -= delta;
+  },
+
+  setCameraPosition(state, position) {
+    console.log(position)
+    state.camera = position;
   }
 }

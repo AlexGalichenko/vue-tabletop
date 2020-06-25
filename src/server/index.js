@@ -137,7 +137,7 @@ io.on('connection', socket => {
           object.id = uniqid();
         }
         object.owner = player;
-        
+        object.updated = Date.now();
         db.objects.push(object);
         io.emit('update_object', container);
         io.emit('create_object', object);
@@ -154,7 +154,7 @@ io.on('connection', socket => {
           container.objects.splice(index, 1);
         }
         object.owner = player;
-        
+        object.updated = Date.now();
         db.objects.push(object);
         io.emit('update_object', container);
         io.emit('create_object', object);
@@ -166,6 +166,7 @@ io.on('connection', socket => {
       object.owner = '';
       object.x = position.x;
       object.y = position.y;
+      object.z = getZ(db);
       object.updated = Date.now();
       io.emit('update_object', object);
     });
