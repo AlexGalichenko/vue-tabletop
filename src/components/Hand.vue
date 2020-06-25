@@ -49,7 +49,7 @@ export default {
   height: 300px;
   width: 80vw;
   left: 10vw;
-  background: rgba(0, 0, 0, 0.1);
+  background:darkgray;
   transform: translateZ(0);
   overflow-y: scroll;
   overflow-x: hidden;
