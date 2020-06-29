@@ -12,7 +12,7 @@ export default {
   computed: {
     style() {
       return {
-        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'transform': `translate(${this.object.x}px, ${this.object.y}px) rotate(${this.object.rotation}deg)`,
         'z-index': this.object.z
       }
     }

@@ -70,7 +70,7 @@ export default {
 
     tableStyle() {
       return {
-        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom}) translateZ(0)`,
+        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom})`,
         'transform-origin': '0 0'
       }
     }
@@ -146,8 +146,8 @@ export default {
 
 <style scoped>
 #table {
-  height: 2000px;
-  width: 3000px;
+  height: 4000px;
+  width: 4000px;
   background-color: darkslategray;
   touch-action: none;
   will-change: transform;

@@ -109,6 +109,13 @@ export default {
       case 'Counter': socket.emit('create_counter', { type, x, y, scale }); break;
       case 'Dice': socket.emit('create_dice', { type, x, y, scale, edges }); break;
     }
+  },
 
-  }
+  rotateRight(store, payload) {
+    socket.emit('rotate_right', payload);
+  },
+
+  rotateLeft(store, payload) {
+    socket.emit('rotate_left', payload);
+  },
 }

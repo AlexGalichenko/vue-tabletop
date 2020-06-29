@@ -322,6 +322,26 @@ io.on('connection', socket => {
       io.emit('create_object', object);
     });
 
+    socket.on('rotate_left', payload => {
+      const object = getObject(db, payload);
+      if (object.rotation - 15 === -360) {
+        object.rotation = 0;
+      } else {
+        object.rotation -= 15;
+      }
+      io.emit('update_object', object);
+    });
+
+    socket.on('rotate_right', payload => {
+      const object = getObject(db, payload);
+      if (object.rotation + 15 === 360) {
+        object.rotation = 0;
+      } else {
+        object.rotation += 15;
+      }
+      io.emit('update_object', object);
+    });
+
   });
 
 });

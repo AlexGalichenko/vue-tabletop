@@ -11,12 +11,18 @@
       <ul class="md-list md-theme-default">
         <li :class="liClass">
           <button type="button" :class="buttonClass" @click="take">
-            <div :class="divClass">Take</div>
+            <div :class="divClass">
+              Take
+              <i class="fas fa-sign-out-alt" />
+            </div>
           </button>
         </li>
         <li v-for="player in players" :key="player" :class="liClass">
           <button type="button" :class="buttonClass" @click="deal(player)">
-            <div :class="divClass">Deal: {{player}}</div>
+            <div :class="divClass">
+              Deal: {{player}}
+              <i class="fas fa-hand-rock" />
+            </div>
           </button>
         </li>
       </ul>
@@ -25,7 +31,7 @@
 </template>
 
 <script>
-import ContextMenu from './BaseContextMenu.vue';
+import ContextMenu from "./BaseContextMenu.vue";
 
 export default {
   extends: ContextMenu,
@@ -34,7 +40,7 @@ export default {
       return this.$store.state.players;
     },
     currentObject() {
-      return this.$store.state.searchCurrentObject
+      return this.$store.state.searchCurrentObject;
     }
   },
   methods: {

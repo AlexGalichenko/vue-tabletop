@@ -23,14 +23,14 @@ export function backCardStyle(object) {
 export function tableFrontCardStyle(object) {
   return {
     ...frontCardStyle(object),
-    'transform': `translate(${object.x}px, ${object.y}px) translateZ(0)`,
+    'transform': `translate(${object.x}px, ${object.y}px) rotate(${object.rotation}deg)`,
   }
 }
 
 export function tableBackCardStyle(object) {
   return {
     ...backCardStyle(object),
-    'transform': `translate(${object.x}px, ${object.y}px) translateZ(0)`
+    'transform': `translate(${object.x}px, ${object.y}px) rotate(${object.rotation}deg)`
   }
 }
 
@@ -70,14 +70,14 @@ export function backTileStyle(object) {
 export function tableFrontTileStyle(object) {
   return {
     ...frontTileStyle(object),
-    'transform': `translate(${object.x}px, ${object.y}px) translateZ(0)`
+    'transform': `translate(${object.x}px, ${object.y}px) rotate(${object.rotation}deg)`
   }
 }
 
 export function tableBackTileStyle(object) {
   return {
     ...backTileStyle(object),
-    'transform': `translate(${object.x}px, ${object.y}px) translateZ(0)`
+    'transform': `translate(${object.x}px, ${object.y}px) rotate(${object.rotation}deg)`
   }
 }
 
@@ -121,13 +121,13 @@ export function backContainerStyle(object) {
 export function tableFrontContainerStyle(object) {
   return {
     ...frontContainerStyle(object),
-    'transform': `translate(${object.x}px, ${object.y}px)`,
+    'transform': `translate(${object.x}px, ${object.y}px) rotate(${object.rotation}deg)`,
   };
 }
 
 export function tableBackContainerStyle(object) {
   return {
     ...backContainerStyle(object),
-    'transform': `translate(${object.x}px, ${object.y}px)`
+    'transform': `translate(${object.x}px, ${object.y}px) rotate(${object.rotation}deg)`
   };
 }
