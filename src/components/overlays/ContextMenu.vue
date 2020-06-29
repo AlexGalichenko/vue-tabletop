@@ -74,6 +74,14 @@
           </button>
         </li>
         <li :class="liClass">
+          <button type="button" :class="buttonClass" @click="copy">
+            <div :class="divClass">
+              Copy
+              <i class="fas fa-copy" />
+            </div>
+          </button>
+        </li>
+        <li :class="liClass">
           <button type="button" :class="buttonClass" @click="deleteObject">
             <div :class="divClass">
               Delete
@@ -191,6 +199,10 @@ export default {
 
     rotateLeft() {
       this.$store.dispatch('rotateLeft', this.currentObject.id);
+    },
+
+    copy() {
+      this.$store.dispatch('copy', this.currentObject.id);
     }
   }
 };

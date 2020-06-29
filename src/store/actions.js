@@ -118,4 +118,8 @@ export default {
   rotateLeft(store, payload) {
     socket.emit('rotate_left', payload);
   },
+
+  copy(store, payload) {
+    socket.emit('copy', payload);
+  }
 }
