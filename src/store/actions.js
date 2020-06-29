@@ -101,13 +101,14 @@ export default {
     socket.emit('delete', payload);
   },
 
-  createObject(store, { frontUrl, backUrl, type, rows, columns, x, y, height, width, scale, infinite, edges }) {
+  createObject(store, { frontUrl, backUrl, type, rows, columns, x, y, height, width, scale, infinite, edges, color }) {
     switch (type) {
       case 'Deck': socket.emit('create_deck', { type, frontUrl, backUrl, rows, columns, x, y, height, width, scale }); break;
       case 'Container': socket.emit('create_container', { type, frontUrl, backUrl, x, y, height, width, scale, infinite }); break;
       case 'Tile': socket.emit('create_tile', { type, frontUrl, backUrl, x, y, height, width, scale }); break;
       case 'Counter': socket.emit('create_counter', { type, x, y, scale }); break;
       case 'Dice': socket.emit('create_dice', { type, x, y, scale, edges }); break;
+      case 'Chip': socket.emit('create_chip', { type, x, y, height, width, scale, color }); break;
     }
   },
 
