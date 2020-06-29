@@ -12,7 +12,8 @@ export default {
   computed: {
     style() {
       return {
-        'transform': `translate(${this.object.x}px, ${this.object.y}px) translateZ(0)`
+        'transform': `translate(${this.object.x}px, ${this.object.y}px)`,
+        'z-index': this.object.z
       }
     }
   },

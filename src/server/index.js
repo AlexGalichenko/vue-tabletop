@@ -57,7 +57,9 @@ io.on('connection', socket => {
         object.y = container.y + 25;
         object.z = getZ(db);
         object.owner = '';
-        
+        object.isDragged = false;
+        object.isFlipped = false;
+
         db.objects.push(object);
         io.emit('update_object', container);
         io.emit('create_object', object);
@@ -78,7 +80,9 @@ io.on('connection', socket => {
         object.y = container.y + 25;
         object.z = getZ(db);
         object.owner = '';
-        
+        object.isDragged = false;
+        object.isFlipped = false;
+
         db.objects.push(object);
         io.emit('update_object', container);
         io.emit('create_object', object);
@@ -138,6 +142,8 @@ io.on('connection', socket => {
         }
         object.owner = player;
         object.updated = Date.now();
+        object.isDragged = false;
+
         db.objects.push(object);
         io.emit('update_object', container);
         io.emit('create_object', object);
@@ -167,6 +173,7 @@ io.on('connection', socket => {
       object.x = position.x;
       object.y = position.y;
       object.z = getZ(db);
+      object.isDragged = false;
       object.updated = Date.now();
       io.emit('update_object', object);
     });
@@ -202,6 +209,9 @@ io.on('connection', socket => {
         scale,
         infinite: false
       };
+      object.isDragged = false;
+      object.isFlipped = false;
+
       for (let column = 1; column <= columns; column++) {
         for (let row = 1; row <= rows; row++) {
           object.objects.push({
@@ -244,6 +254,8 @@ io.on('connection', socket => {
         width,
         scale
       };
+      object.isDragged = false;
+      object.isFlipped = false;
       db.objects.push(object);
       io.emit('create_object', object);
     });
@@ -266,6 +278,8 @@ io.on('connection', socket => {
         scale,
         infinite
       };
+      object.isDragged = false;
+      object.isFlipped = false;
       db.objects.push(object);
       io.emit('create_object', object);
     });
@@ -283,6 +297,8 @@ io.on('connection', socket => {
         scale,
         count: 0
       };
+      object.isDragged = false;
+      object.isFlipped = false;
       db.objects.push(object);
       io.emit('create_object', object);
     });
@@ -300,6 +316,8 @@ io.on('connection', socket => {
         scale,
         edges
       };
+      object.isDragged = false;
+      object.isFlipped = false;
       db.objects.push(object);
       io.emit('create_object', object);
     });

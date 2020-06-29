@@ -43,6 +43,8 @@ export default {
         containerId: this.currentObject.object.id,
         index: this.currentObject.index
       });
+      this.$parent.showSearchDialog = false;
+      this.hideContextMenu();
     },
 
     deal(player) {
@@ -51,6 +53,8 @@ export default {
         index: this.currentObject.index,
         player
       });
+      this.$parent.showSearchDialog = false;
+      this.hideContextMenu();
     }
   }
 };

@@ -95,7 +95,6 @@ export default {
     }
   },
   mounted() {
-    console.log('mounted')
     window.scrollTo(0,0);
 
     this.$store.dispatch('init');
@@ -160,5 +159,6 @@ export default {
 }
 .dragged {
   opacity: 50%;
+  z-index: 1500 !important;
 }
 </style>
