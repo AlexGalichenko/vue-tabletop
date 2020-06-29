@@ -18,7 +18,7 @@ export default {
   },
   methods: {
     login() {
-      window.localStorage.setItem("name", this.name);
+      window.localStorage.setItem('name', this.name);
       this.$router.push('/game');
     }
   },

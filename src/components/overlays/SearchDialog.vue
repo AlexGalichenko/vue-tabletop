@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import Card from "../game_objects/SearchCard.vue";
-import Tile from "../game_objects/SearchTile.vue";
-import Container from "../game_objects/SearchContainer.vue";
-import Counter from "../game_objects/SearchCounter.vue";
+import Card from '../game_objects/SearchCard.vue';
+import Tile from '../game_objects/SearchTile.vue';
+import Container from '../game_objects/SearchContainer.vue';
+import Counter from '../game_objects/SearchCounter.vue';
 
 export default {
   components: {

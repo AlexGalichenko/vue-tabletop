@@ -70,7 +70,7 @@ export default {
 
     tableStyle() {
       return {
-        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom}) translateZ(0)`,
+        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom})`,
         'transform-origin': '0 0'
       }
     }
@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     changeZoom(event) {
-      this.$store.commit("changeZoom", event.deltaY / 1000)
+      this.$store.commit('changeZoom', event.deltaY / 1000)
     }
   },
   mounted() {
@@ -101,7 +101,7 @@ export default {
 
     const vueThis = this;
     interact('.container:not(.infinite)').dropzone({
-      accept: ":not(.hand) > *",
+      accept: ':not(.hand) > *',
       overlap: 0.1, //% of element
       ondragenter: function(event) {
         event.target.classList.add('drop-target');
@@ -146,8 +146,8 @@ export default {
 
 <style scoped>
 #table {
-  height: 2000px;
-  width: 3000px;
+  height: 4000px;
+  width: 4000px;
   background-color: darkslategray;
   touch-action: none;
   will-change: transform;

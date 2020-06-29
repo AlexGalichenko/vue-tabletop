@@ -1,7 +1,7 @@
 <script>
-import Container from "./BaseContainer.vue";
+import Container from './BaseContainer.vue';
 
-import { frontContainerStyle, backContainerStyle } from "../utils/styles.js";
+import { frontContainerStyle, backContainerStyle } from '../utils/styles.js';
 
 export default {
   extends: Container,

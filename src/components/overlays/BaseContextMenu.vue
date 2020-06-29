@@ -3,7 +3,7 @@ export default {
   computed: {
     menuStyle() {
       return {
-        position: "absolute",
+        position: 'absolute',
         top: `${this.$store.state.contextMenu.y - 10}px`,
         left: `${this.$store.state.contextMenu.x - 10}px`
       };

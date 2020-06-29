@@ -1,9 +1,9 @@
 <script>
-import Container from "./BaseContainer.vue";
-import Draggable from "../mixins/Draggable.js";
-import HasContextMenu from "../mixins/HasContextMenu.js";
+import Container from './BaseContainer.vue';
+import Draggable from '../mixins/Draggable.js';
+import HasContextMenu from '../mixins/HasContextMenu.js';
 
-import { tableFrontContainerStyle, tableBackContainerStyle } from "../utils/styles.js";
+import { tableFrontContainerStyle, tableBackContainerStyle } from '../utils/styles.js';
 
 export default {
   extends: Container,
