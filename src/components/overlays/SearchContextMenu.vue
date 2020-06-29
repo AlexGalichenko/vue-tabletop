@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import ContextMenu from "./BaseContextMenu.vue";
+import ContextMenu from './BaseContextMenu.vue';
 
 export default {
   extends: ContextMenu,
@@ -45,7 +45,7 @@ export default {
   },
   methods: {
     take(event) {
-      this.$store.dispatch("takeFromContainerById", {
+      this.$store.dispatch('takeFromContainerById', {
         containerId: this.currentObject.object.id,
         index: this.currentObject.index
       });
@@ -54,7 +54,7 @@ export default {
     },
 
     deal(player) {
-      this.$store.dispatch("dealFromContainerById", {
+      this.$store.dispatch('dealFromContainerById', {
         containerId: this.currentObject.object.id,
         index: this.currentObject.index,
         player

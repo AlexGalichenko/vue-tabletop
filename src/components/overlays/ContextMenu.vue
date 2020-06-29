@@ -109,16 +109,16 @@
 </template>
 
 <script>
-import ContextMenu from "./BaseContextMenu.vue";
+import ContextMenu from './BaseContextMenu.vue';
 
 export default {
   extends: ContextMenu,
   computed: {
     container() {
-      return this.currentObject.type === "Container";
+      return this.currentObject.type === 'Container';
     },
     onHand() {
-      return this.currentObject.owner && this.currentObject.owner !== "";
+      return this.currentObject.owner && this.currentObject.owner !== '';
     },
     players() {
       return this.$store.state.players;
@@ -129,25 +129,25 @@ export default {
   },
   methods: {
     take(event) {
-      this.$store.dispatch("takeFromContainer", this.currentObject.id);
+      this.$store.dispatch('takeFromContainer', this.currentObject.id);
     },
 
     flip(event) {
-      this.$store.dispatch("flip", this.currentObject.id);
+      this.$store.dispatch('flip', this.currentObject.id);
     },
 
     shuffle(event) {
-      this.$store.dispatch("shuffle", this.currentObject.id);
+      this.$store.dispatch('shuffle', this.currentObject.id);
     },
 
     deal(player) {
-      if (this.currentObject.type === "Container") {
-        this.$store.dispatch("dealFromContainer", {
+      if (this.currentObject.type === 'Container') {
+        this.$store.dispatch('dealFromContainer', {
           objectId: this.currentObject.id,
           player
         });
       } else {
-        this.$store.dispatch("deal", {
+        this.$store.dispatch('deal', {
           objectId: this.currentObject.id,
           player
         });
@@ -156,7 +156,7 @@ export default {
 
     dealAll() {
       this.players.forEach(player => {
-        this.$store.dispatch("dealFromContainer", {
+        this.$store.dispatch('dealFromContainer', {
           objectId: this.currentObject.id,
           player
         });
@@ -164,7 +164,7 @@ export default {
     },
 
     play() {
-      this.$store.dispatch("play", {
+      this.$store.dispatch('play', {
         objectId: this.currentObject.id,
         position: {
           x:
@@ -178,19 +178,19 @@ export default {
     },
 
     pin() {
-      this.$store.dispatch("pin", this.currentObject.id);
+      this.$store.dispatch('pin', this.currentObject.id);
     },
 
     deleteObject() {
-      this.$store.dispatch("deleteObject", this.currentObject.id);
+      this.$store.dispatch('deleteObject', this.currentObject.id);
     },
 
     rotateRight() {
-      this.$store.dispatch("rotateRight", this.currentObject.id);
+      this.$store.dispatch('rotateRight', this.currentObject.id);
     },
 
     rotateLeft() {
-      this.$store.dispatch("rotateLeft", this.currentObject.id);
+      this.$store.dispatch('rotateLeft', this.currentObject.id);
     }
   }
 };

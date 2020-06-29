@@ -91,7 +91,7 @@ export default {
   },
   methods: {
     changeZoom(event) {
-      this.$store.commit("changeZoom", event.deltaY / 1000)
+      this.$store.commit('changeZoom', event.deltaY / 1000)
     }
   },
   mounted() {
@@ -101,7 +101,7 @@ export default {
 
     const vueThis = this;
     interact('.container:not(.infinite)').dropzone({
-      accept: ":not(.hand) > *",
+      accept: ':not(.hand) > *',
       overlap: 0.1, //% of element
       ondragenter: function(event) {
         event.target.classList.add('drop-target');

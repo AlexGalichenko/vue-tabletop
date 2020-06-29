@@ -1,6 +1,6 @@
 <script>
-import Counter from "./BaseCounter.vue";
-import HasSearchContextMenu from "../mixins/HasSearchContextMenu.js";
+import Counter from './BaseCounter.vue';
+import HasSearchContextMenu from '../mixins/HasSearchContextMenu.js';
 
 export default {
   extends: Counter,

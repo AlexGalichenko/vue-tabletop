@@ -76,9 +76,9 @@ export default {
   },
   data() {
     return {
-      frontUrl: "",
-      backUrl: "",
-      type: "Deck",
+      frontUrl: '',
+      backUrl: '',
+      type: 'Deck',
       rows: 1,
       columns: 1,
       height: 300,
@@ -90,12 +90,12 @@ export default {
   },
   methods: {
     saveCreateDialog() {
-      this.$store.dispatch("createObject", {
+      this.$store.dispatch('createObject', {
         x: 150 - this.$parent.table.x,
         y: 150 - this.$parent.table.y,
         ...this.$data
       });
-      this.$emit("closeDialog");
+      this.$emit('closeDialog');
     }
   }
 };
