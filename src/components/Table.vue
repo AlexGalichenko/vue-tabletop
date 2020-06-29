@@ -38,6 +38,7 @@ import Card from './game_objects/TableCard.vue';
 import Tile from './game_objects/TableTile.vue';
 import Container from './game_objects/TableContainer.vue';
 import Counter from './game_objects/TableCounter.vue';
+import Chip from './game_objects/TableChip.vue';
 
 import SpeedDial from './SpeedDial.vue';
 import ImportDialog from './overlays/ImportDialog.vue';
@@ -54,6 +55,7 @@ export default {
     Tile,
     Container,
     Counter,
+    Chip,
     SpeedDial,
     ImportDialog,
     CreateDialog,
@@ -70,8 +72,7 @@ export default {
 
     tableStyle() {
       return {
-        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom})`,
-        'transform-origin': '0 0'
+        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom})`
       }
     }
   },
@@ -151,6 +152,7 @@ export default {
   background-color: darkslategray;
   touch-action: none;
   will-change: transform;
+  transform-origin: 0 0;
 }
 .draggable {
   position: absolute;

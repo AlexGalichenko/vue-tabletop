@@ -200,6 +200,7 @@ io.on('connection', socket => {
         objects: [],
         frontUrl: backUrl,
         z: getZ(db),
+        rotation: 0,
         x,
         y,
         rows,
@@ -220,6 +221,7 @@ io.on('connection', socket => {
             x: 0,
             y: 0,
             z: 0,
+            rotation: 0,
             row,
             column,
             frontUrl,
@@ -239,20 +241,12 @@ io.on('connection', socket => {
     /**
      * Create tile
      */
-    socket.on('create_tile', ({ type, frontUrl, backUrl, rows, columns, height, width, x, y, scale }) => {
+    socket.on('create_tile', payload => {
       const object = {
+        ...payload,
         id: uniqid(),
         z: getZ(db),
-        type,
-        frontUrl,
-        backUrl,
-        x,
-        y,
-        rows,
-        columns,
-        height,
-        width,
-        scale
+        rotation: 0
       };
       object.isDragged = false;
       object.isFlipped = false;
@@ -268,6 +262,7 @@ io.on('connection', socket => {
         id: uniqid(),
         z: getZ(db),
         objects: [],
+        rotation: 0,
         type,
         frontUrl,
         backUrl,
@@ -292,10 +287,11 @@ io.on('connection', socket => {
         type,
         id: uniqid(),
         z: getZ(db),
+        rotation: 0,
+        count: 0,
         x,
         y,
         scale,
-        count: 0
       };
       object.isDragged = false;
       object.isFlipped = false;
@@ -311,6 +307,7 @@ io.on('connection', socket => {
         type,
         id: uniqid(),
         z: getZ(db),
+        rotation: 0,
         x,
         y,
         scale,
@@ -318,6 +315,27 @@ io.on('connection', socket => {
       };
       object.isDragged = false;
       object.isFlipped = false;
+      db.objects.push(object);
+      io.emit('create_object', object);
+    });
+
+    /**
+     * Create dice
+     */
+    socket.on('create_chip', ({ type, x, y, height, width, scale, color }) => {
+      const object = {
+        type,
+        id: uniqid(),
+        z: getZ(db),
+        rotation: 0,
+        x,
+        y,
+        height,
+        width,
+        scale,
+        color
+      };
+      object.isDragged = false;
       db.objects.push(object);
       io.emit('create_object', object);
     });

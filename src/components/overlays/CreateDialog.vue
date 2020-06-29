@@ -11,15 +11,16 @@
           <md-option value="Counter">Counter</md-option>
           <md-option value="Container">Container</md-option>
           <md-option value="Dice">Dice</md-option>
+          <md-option value="Chip">Chip</md-option>
         </md-select>
       </md-field>
 
-      <md-field v-if="!['Counter', 'Dice'].includes(type)">
+      <md-field v-if="!['Counter', 'Dice', 'Chip'].includes(type)">
         <label>Front URL</label>
         <md-input v-model="frontUrl" />
       </md-field>
 
-      <md-field v-if="!['Counter', 'Dice'].includes(type)">
+      <md-field v-if="!['Counter', 'Dice', 'Chip'].includes(type)">
         <label>Back URL</label>
         <md-input v-model="backUrl" />
       </md-field>
@@ -34,12 +35,12 @@
         <md-input v-model="columns" />
       </md-field>
 
-      <md-field v-if="['Deck', 'Tile', 'Container'].includes(type)">
+      <md-field v-if="['Deck', 'Tile', 'Container', 'Chip'].includes(type)">
         <label>Height</label>
         <md-input v-model="height" />
       </md-field>
 
-      <md-field v-if="['Deck', 'Tile', 'Container'].includes(type)">
+      <md-field v-if="['Deck', 'Tile', 'Container', 'Chip'].includes(type)">
         <label>Width</label>
         <md-input v-model="width" />
       </md-field>
@@ -47,6 +48,11 @@
       <md-field v-if="['Dice'].includes(type)">
         <label>Edges</label>
         <md-input v-model="edges" />
+      </md-field>
+
+      <md-field v-if="type === 'Chip'">
+        <label>Color</label>
+        <md-input v-model="color" :style="`background: #${color}`"/>
       </md-field>
 
       <md-field>
@@ -85,7 +91,8 @@ export default {
       width: 200,
       scale: 1,
       infinite: false,
-      edges: 6
+      edges: 6,
+      color: 'FFF'
     };
   },
   methods: {
