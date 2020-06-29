@@ -342,6 +342,23 @@ io.on('connection', socket => {
       io.emit('update_object', object);
     });
 
+    socket.on('copy', (objectId) => {
+      const originalObject = getObject(db, objectId);
+      const object = cloneDeep(originalObject);
+      object.id = uniqid();
+      object.owner = '';
+      object.x = originalObject.x + 25;
+      object.y = originalObject.y + 25;
+      object.z = getZ(db);
+      object.isDragged = false;
+      object.updated = Date.now();
+      if (object.objects && object.objects.length > 0) {
+        object.objects.forEach(obj => obj.id = uniqid());
+      }
+      db.objects.push(object);
+      io.emit('create_object', object);
+    });
+
   });
 
 });
