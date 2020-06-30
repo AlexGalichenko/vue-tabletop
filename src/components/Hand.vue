@@ -7,10 +7,7 @@
       :is="obj.type"
       :data-id="obj.id"
     />
-    <md-button
-      class="md-primary expand"
-      @click="showHand = !showHand"
-    >{{showHand ? 'Collapse' : 'Expand'}}</md-button>
+    <component :is="$store.state.contextMenu.type"/>
   </div>
 </template>
 
@@ -19,13 +16,15 @@ import Card from './game_objects/HandCard.vue';
 import Tile from './game_objects/HandTile.vue';
 import Container from './game_objects/HandContainer.vue';
 import Counter from './game_objects/BaseCounter.vue';
+import ContextMenu from './overlays/ContextMenu.vue';
 
 export default {
   components: {
     Card,
     Tile,
     Container,
-    Counter
+    Counter,
+    ContextMenu
   },
   data() {
     return {
@@ -39,37 +38,22 @@ export default {
     handClass() {
       return `hand ${this.showHand ? 'expanded' : 'collapsed'}`;
     }
+  },
+  mounted() {
+    this.$store.dispatch('init');
   }
 };
 </script>
 
-<style scoped>
+<style>
+body {
+  overflow: scroll;
+}
 .hand {
-  position: fixed;
-  height: 300px;
-  width: 80vw;
-  left: 10vw;
-  background:darkgray;
-  transform: translateZ(0);
-  overflow-y: scroll;
-  overflow-x: hidden;
+  background-color: darkslategray;
 }
 
 .hand > * {
   display: inline-block;
-}
-
-.hand.expanded {
-  bottom: 0vh;
-}
-
-.hand.collapsed {
-  bottom: -250px;
-}
-
-.hand .expand {
-  position: absolute;
-  top: 2px;
-  right: 2px;
 }
 </style>

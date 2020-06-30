@@ -18,7 +18,6 @@
       @showImportDialog="showImportDialog = true"
       @showCreateDialog="showCreateDialog = true" 
     />
-    <Hand />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
     <CreateDialog :showDialog="showCreateDialog" @closeDialog="showCreateDialog = false" />
     <SearchDialog :showDialog="showSearchDialog" @closeDialog="showSearchDialog = false" />
@@ -46,7 +45,6 @@ import CreateDialog from './overlays/CreateDialog.vue';
 import SearchDialog from './overlays/SearchDialog.vue';
 import ContextMenu from './overlays/ContextMenu.vue';
 import SearchContextMenu from './overlays/SearchContextMenu.vue';
-import Hand from './Hand.vue';
 import Preview from './Preview.vue';
 
 export default {
@@ -62,7 +60,6 @@ export default {
     SearchDialog,
     ContextMenu,
     SearchContextMenu,
-    Hand,
     Preview
   },
   computed: {
@@ -72,7 +69,7 @@ export default {
 
     tableStyle() {
       return {
-        'transform': `translate(${this.table.x}px, ${this.table.y}px) scale(${this.$store.state.zoom})`
+        'transform': `translate(${this.$store.state.table.x}px, ${this.$store.state.table.y}px) scale(${this.$store.state.zoom})`
       }
     }
   },
@@ -136,8 +133,7 @@ export default {
       },
       listeners: {
         move(event) {
-          vueThis.table.x += event.dx;
-          vueThis.table.y += event.dy;
+          vueThis.$store.commit('moveTable', { dx: event.dx, dy: event.dy });
         }
       }
     });
@@ -145,7 +141,10 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
+body {
+  overflow: hidden;
+}
 #table {
   height: 4000px;
   width: 4000px;

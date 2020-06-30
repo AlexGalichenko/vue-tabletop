@@ -5,13 +5,10 @@
     </md-speed-dial-target>
 
     <md-speed-dial-content>
-      <md-button class="md-icon-button">
-        <i class="fas fa-door-open" />
+      <md-button class="md-icon-button" @click="openHand">
+        <i class="fas fa-hand-paper" />
       </md-button>
-      <md-button class="md-icon-button">
-        <i class="fas fa-door-closed" />
-      </md-button>
-      <md-button class="md-icon-button"  @click="$emit('showCreateDialog')">
+      <md-button class="md-icon-button" @click="$emit('showCreateDialog')">
         <i class="fas fa-plus-circle" />
       </md-button>
       <md-button class="md-icon-button">
@@ -42,6 +39,10 @@ export default {
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
+    },
+    openHand() {
+      const handWindow = window.open('/#/hand', 'Hand', 'resizable=yes,scrollbars=no,width=860,height=600');
+      this.$store.commit('setHandWindow', handWindow);
     }
   }
 };

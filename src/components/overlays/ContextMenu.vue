@@ -176,11 +176,11 @@ export default {
         objectId: this.currentObject.id,
         position: {
           x:
-            (window.scrollX + window.innerWidth / 2 - this.$parent.table.x) /
-            this.$store.state.zoom,
+            (window.mainScroll.x + window.mainDimension.width / 2 - window.mainTable.x) /
+            window.mainZoom,
           y:
-            (window.scrollY + window.innerHeight / 2 - this.$parent.table.y) /
-            this.$store.state.zoom
+            (window.mainScroll.y + window.mainDimension.height / 2 - window.mainTable.y) /
+            window.mainZoom
         }
       });
     },
