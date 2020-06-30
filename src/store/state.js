@@ -9,7 +9,7 @@ export default {
   showPreview: false,
   currentObject: null,
   zoom: 1,
-  camera: {
+  table: {
     x: 0,
     y: 0
   }

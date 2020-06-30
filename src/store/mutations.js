@@ -69,8 +69,22 @@ export default {
     if (state.zoom - delta >= 0.5 && state.zoom - delta <= 2) state.zoom -= delta;
   },
 
-  setCameraPosition(state, position) {
-    console.log(position)
-    state.camera = position;
+  moveTable(state, { dx, dy }) {
+    state.table.x += dx;
+    state.table.y += dy;
+  },
+
+  setHandWindow(state, handWindow) {
+    state.handWindow = handWindow;
+    state.handWindow.mainTable = state.table;
+    state.handWindow.mainScroll = {
+      x: window.scrollX,
+      y: window.scrollY
+    }
+    state.handWindow.mainDimension = {
+      height: window.innerHeight,
+      width: window.innerWidth
+    }
+    state.handWindow.mainZoom = state.zoom;
   }
 }
