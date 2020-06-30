@@ -41,7 +41,7 @@ export default {
       document.body.removeChild(element);
     },
     openHand() {
-      const handWindow = window.open('/#/hand', 'Hand', 'resizable=yes,scrollbars=no,width=860,height=600');
+      const handWindow = window.open('/#/hand', 'Hand', 'resizable=yes,scrollbars=no,width=860,height=400');
       this.$store.commit('setHandWindow', handWindow);
     }
   }

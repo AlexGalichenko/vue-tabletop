@@ -59,6 +59,7 @@ io.on('connection', socket => {
         object.owner = '';
         object.isDragged = false;
         object.isFlipped = false;
+        object.pinned = false;
 
         db.objects.push(object);
         io.emit('update_object', container);
@@ -82,6 +83,7 @@ io.on('connection', socket => {
         object.owner = '';
         object.isDragged = false;
         object.isFlipped = false;
+        object.pinned = false;
 
         db.objects.push(object);
         io.emit('update_object', container);
@@ -174,6 +176,7 @@ io.on('connection', socket => {
       object.y = position.y;
       object.z = getZ(db);
       object.isDragged = false;
+      object.pinned = false;
       object.updated = Date.now();
       io.emit('update_object', object);
     });

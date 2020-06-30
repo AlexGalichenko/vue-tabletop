@@ -49,7 +49,11 @@ export default {
 body {
   overflow: scroll;
 }
+
+
 .hand {
+  min-width: 100vw;
+  min-height: 100vh;
   background-color: darkslategray;
 }
 
