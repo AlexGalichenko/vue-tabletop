@@ -46,11 +46,11 @@
       </md-field>
 
       <md-field v-if="['Dice'].includes(type)">
-        <label>Edges</label>
-        <md-input v-model="edges" />
+        <label>Values</label>
+        <md-input v-model="values" />
       </md-field>
 
-      <md-field v-if="type === 'Chip'">
+      <md-field v-if="['Dice', 'Chip'].includes(type)">
         <label>Color</label>
         <md-input v-model="color" :style="`background: #${color}`"/>
       </md-field>
@@ -91,15 +91,15 @@ export default {
       width: 200,
       scale: 1,
       infinite: false,
-      edges: 6,
+      values: '1,2,3,4,5,6',
       color: 'FFF'
     };
   },
   methods: {
     saveCreateDialog() {
       this.$store.dispatch('createObject', {
-        x: 150 - this.$parent.table.x,
-        y: 150 - this.$parent.table.y,
+        x: 150 - this.$store.state.table.x,
+        y: 150 - this.$store.state.table.y,
         ...this.$data
       });
       this.$emit('closeDialog');

@@ -57,6 +57,14 @@
             </div>
           </button>
         </li>
+        <li :class="liClass" v-show="['Dice'].includes(currentObject.type)">
+          <button type="button" :class="buttonClass" @click="roll">
+            <div :class="divClass">
+              Roll
+              <i class="fas fa-dice" />
+            </div>
+          </button>
+        </li>
         <li :class="liClass">
           <button type="button" :class="buttonClass" @click="pin">
             <div :class="divClass">
@@ -203,6 +211,10 @@ export default {
 
     copy() {
       this.$store.dispatch('copy', this.currentObject.id);
+    },
+
+    roll() {
+      this.$store.dispatch('roll', this.currentObject.id);
     }
   }
 };

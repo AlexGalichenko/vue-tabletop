@@ -38,6 +38,7 @@ import Tile from './game_objects/TableTile.vue';
 import Container from './game_objects/TableContainer.vue';
 import Counter from './game_objects/TableCounter.vue';
 import Chip from './game_objects/TableChip.vue';
+import Dice from './game_objects/TableDice.vue';
 
 import SpeedDial from './SpeedDial.vue';
 import ImportDialog from './overlays/ImportDialog.vue';
@@ -60,7 +61,8 @@ export default {
     SearchDialog,
     ContextMenu,
     SearchContextMenu,
-    Preview
+    Preview,
+    Dice
   },
   computed: {
     objects() {

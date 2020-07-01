@@ -187,6 +187,12 @@ io.on('connection', socket => {
       io.emit('update_object', object);
     });
 
+    socket.on('roll', objectId => {
+      const object = getObject(db, objectId);
+      object.value = object.values[Math.round(Math.random() * object.values.length)];
+      io.emit('update_object', object);
+    });
+
     socket.on('delete', objectId => {
       const objectIndex = getObjectIndex(db, objectId);
       db.objects.splice(objectIndex, 1);
@@ -305,16 +311,19 @@ io.on('connection', socket => {
     /**
      * Create dice
      */
-    socket.on('create_dice', ({ type, x, y, scale, edges }) => {
+    socket.on('create_dice', ({ type, x, y, scale, values, color }) => {
+      const vals = values.split(/\s*,\s*/);
       const object = {
         type,
         id: uniqid(),
         z: getZ(db),
         rotation: 0,
+        value: vals[0],
+        values: vals,
         x,
         y,
         scale,
-        edges
+        color
       };
       object.isDragged = false;
       object.isFlipped = false;
@@ -323,7 +332,7 @@ io.on('connection', socket => {
     });
 
     /**
-     * Create dice
+     * Create chip
      */
     socket.on('create_chip', ({ type, x, y, height, width, scale, color }) => {
       const object = {
