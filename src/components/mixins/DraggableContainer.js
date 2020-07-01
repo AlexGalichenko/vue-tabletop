@@ -18,5 +18,18 @@ export default {
         }
       }
     });
+
+    interact(this.$el).dropzone({
+      overlap: 0.1,
+      ondrop: function(event) {
+        const objectId = event.relatedTarget.getAttribute('data-id');
+        const containerId = vueThis.object.id;
+
+        vueThis.$store.dispatch('putObjectToContainer', {
+          objectId,
+          containerId
+        });
+      }
+    });
   }
 }
