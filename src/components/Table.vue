@@ -98,39 +98,8 @@ export default {
     this.$store.dispatch('init');
 
     const vueThis = this;
-    interact('.container:not(.infinite)').dropzone({
-      accept: ':not(.hand) > *',
-      overlap: 0.1, //% of element
-      ondragenter: function(event) {
-        event.target.classList.add('drop-target');
-        event.relatedTarget.classList.add('drop-relatedTarget');
-      },
-      ondragleave: function(event) {
-        event.relatedTarget.classList.remove('drop-relatedTarget');
-        event.target.classList.remove('drop-target');
-      },
-      ondrop: function(event) {
-        event.relatedTarget.classList.remove('drop-relatedTarget');
-        event.target.classList.remove('drop-target');
-
-        const objectId = event.relatedTarget.getAttribute('data-id');
-        const containerId = event.target.getAttribute('data-id');
-
-        vueThis.$store.dispatch('putObjectToContainer', {
-          objectId,
-          containerId
-        });
-      }
-    });
-
+    
     interact('#table').draggable({
-      inertia: {
-        resistance: 60
-      },
-      restrict: {
-        endOnly: false,
-        elementRect: { top: 0, left: 0, bottom: 1, right: 1 }
-      },
       listeners: {
         move(event) {
           vueThis.$store.commit('moveTable', { dx: event.dx, dy: event.dy });
