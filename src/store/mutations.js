@@ -4,11 +4,15 @@ export default {
     state.objects = objects;
   },
 
+  loadBoards(state, boards) {
+    state.boards = boards;
+  },
+
   updateName(state, username) {
     state.username = username;
   },
 
-  addPlayers(state, players) {
+  loadPlayers(state, players) {
     state.players = players;
   },
 
@@ -86,5 +90,9 @@ export default {
       width: window.innerWidth
     }
     state.handWindow.mainZoom = state.zoom;
+  },
+
+  createBoard(state, board) {
+    state.boards.push(board);
   }
 }
