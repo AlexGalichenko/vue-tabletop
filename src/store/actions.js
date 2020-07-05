@@ -9,10 +9,11 @@ export default {
 
     socket.on('initial_load', payload => {
       store.commit('loadObjects', payload.objects);
+      store.commit('loadBoards', payload.boards);
     });
 
     socket.on('new_user', players => {
-      store.commit('addPlayers', players);
+      store.commit('loadPlayers', players);
     });
 
     socket.on('update_object', object => {
@@ -31,10 +32,14 @@ export default {
       store.commit('makeDragged', objectId);
     });
 
+    socket.on('create_board', board => {
+      store.commit('createBoard', board);
+    });
+
   },
 
-  loadGame(store, game) {
-    socket.emit('load_game', game);
+  loadGame(store, payload) {
+    socket.emit('load_game', payload);
   },
 
   moveStart(store, object) {
@@ -126,5 +131,13 @@ export default {
 
   roll(store, payload) {
     socket.emit('roll', payload);
-  }
+  },
+
+  createBoard(store, payload) {
+    socket.emit('create_board', payload);
+  },
+
+  toBoard(store, payload) {
+    socket.emit('to_board', payload);
+  },
 }

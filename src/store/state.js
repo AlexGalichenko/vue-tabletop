@@ -2,6 +2,7 @@ export default {
   username: null,
   players: [],
   objects: [],
+  boards: [],
 
   contextMenu: {
     show: false

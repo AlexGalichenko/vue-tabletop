@@ -37,8 +37,9 @@ io.on('connection', socket => {
       io.emit('update_object', object);
     });
 
-    socket.on('load_game', payload => {
-      db.objects = payload;
+    socket.on('load_game', ({ game, boards }) => {
+      db.objects = game;
+      db.boards = boards;
       io.emit('initial_load', db);
     });
 
@@ -60,6 +61,7 @@ io.on('connection', socket => {
         object.isDragged = false;
         object.isFlipped = false;
         object.pinned = false;
+        object.board = container.board;
 
         db.objects.push(object);
         io.emit('update_object', container);
@@ -84,6 +86,7 @@ io.on('connection', socket => {
         object.isDragged = false;
         object.isFlipped = false;
         object.pinned = false;
+        object.board = container.board;
 
         db.objects.push(object);
         io.emit('update_object', container);
@@ -145,6 +148,9 @@ io.on('connection', socket => {
         object.owner = player;
         object.updated = Date.now();
         object.isDragged = false;
+        object.x = 25;
+        object.y = 25;
+        object.z = getZ(db);
 
         db.objects.push(object);
         io.emit('update_object', container);
@@ -163,6 +169,10 @@ io.on('connection', socket => {
         }
         object.owner = player;
         object.updated = Date.now();
+        object.x = 25;
+        object.y = 25;
+        object.z = getZ(db);
+
         db.objects.push(object);
         io.emit('update_object', container);
         io.emit('create_object', object);
@@ -178,6 +188,7 @@ io.on('connection', socket => {
       object.isDragged = false;
       object.pinned = false;
       object.updated = Date.now();
+      object.board = '';
       io.emit('update_object', object);
     });
 
@@ -210,6 +221,7 @@ io.on('connection', socket => {
         frontUrl: backUrl,
         z: getZ(db),
         rotation: 0,
+        board: '',
         x,
         y,
         rows,
@@ -255,7 +267,8 @@ io.on('connection', socket => {
         ...payload,
         id: uniqid(),
         z: getZ(db),
-        rotation: 0
+        rotation: 0,
+        board: '',
       };
       object.isDragged = false;
       object.isFlipped = false;
@@ -272,6 +285,7 @@ io.on('connection', socket => {
         z: getZ(db),
         objects: [],
         rotation: 0,
+        board: '',
         type,
         frontUrl,
         backUrl,
@@ -298,6 +312,7 @@ io.on('connection', socket => {
         z: getZ(db),
         rotation: 0,
         count: 0,
+        board: '',
         x,
         y,
         scale,
@@ -320,6 +335,7 @@ io.on('connection', socket => {
         rotation: 0,
         value: vals[0],
         values: vals,
+        board: '',
         x,
         y,
         scale,
@@ -340,6 +356,7 @@ io.on('connection', socket => {
         id: uniqid(),
         z: getZ(db),
         rotation: 0,
+        board: '',
         x,
         y,
         height,
@@ -387,6 +404,23 @@ io.on('connection', socket => {
       }
       db.objects.push(object);
       io.emit('create_object', object);
+    });
+
+    socket.on('create_board', (board) => {
+      board.id = uniqid();
+      db.boards.push(board);
+      io.emit('create_board', board);
+    });
+
+    socket.on('to_board', ({objectId, board}) => {
+      const object = getObject(db, objectId);
+      object.board = board.id;
+      object.x = 25;
+      object.y = 25;
+      object.z = getZ(db);
+      object.owner = '';
+      object.isDragged = false;
+      io.emit('update_object', object);
     });
 
   });

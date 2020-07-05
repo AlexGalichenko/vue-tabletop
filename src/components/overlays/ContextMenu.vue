@@ -25,6 +25,7 @@
             </div>
           </button>
         </li>
+        <!--TODO replace with TO BOARD functionality -->
         <li :class="liClass" v-show="onHand">
           <button type="button" :class="buttonClass" @click="play">
             <div :class="divClass">
@@ -119,6 +120,18 @@
             </div>
           </button>
         </li>
+        <li
+          v-for="board in boards"
+          :key="board.id"
+          :class="liClass"
+        >
+          <button type="button" :class="buttonClass" @click="toBoard(board)">
+            <div :class="divClass">
+              To Board: {{board.name}}
+              <i class="fas fa-external-link-square-alt" />
+            </div>
+          </button>
+        </li>
       </ul>
     </div>
   </div>
@@ -138,6 +151,15 @@ export default {
     },
     players() {
       return this.$store.state.players;
+    },
+    boards() {
+      return [
+        {
+          id: '',
+          name: 'Main'
+        },
+        ...this.$store.state.boards
+      ];
     },
     currentObject() {
       return this.$store.state.currentObject;
@@ -215,6 +237,13 @@ export default {
 
     roll() {
       this.$store.dispatch('roll', this.currentObject.id);
+    },
+
+    toBoard(board) {
+      this.$store.dispatch('toBoard', {
+        objectId: this.currentObject.id,
+        board
+      });
     }
   }
 };

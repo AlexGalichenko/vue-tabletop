@@ -1,5 +1,6 @@
 <template>
   <div id="room">
+    <Toolbar/>
     <div id="table"
       :style="tableStyle"
       @mousewheel.prevent="changeZoom"
@@ -16,16 +17,16 @@
 
     <SpeedDial
       @showImportDialog="showImportDialog = true"
-      @showCreateDialog="showCreateDialog = true" 
+      @showCreateDialog="showCreateDialog = true"
+      @showCreateBoardDialog="showCreateBoardDialog = true"  
     />
     <ImportDialog :showDialog="showImportDialog" @closeDialog="showImportDialog = false" />
     <CreateDialog :showDialog="showCreateDialog" @closeDialog="showCreateDialog = false" />
     <SearchDialog :showDialog="showSearchDialog" @closeDialog="showSearchDialog = false" />
+    <CreateBoardDialog :showDialog="showCreateBoardDialog" @closeDialog="showCreateBoardDialog = false" />
 
-      <component
-      :is="$store.state.contextMenu.type"
-      @showSearchDialog="showSearchDialog = true"
-      />
+    <component :is="$store.state.contextMenu.type" @showSearchDialog="showSearchDialog = true"
+    />
     <Preview />
   </div>
 </template>
@@ -43,10 +44,12 @@ import Dice from './game_objects/TableDice.vue';
 import SpeedDial from './SpeedDial.vue';
 import ImportDialog from './overlays/ImportDialog.vue';
 import CreateDialog from './overlays/CreateDialog.vue';
+import CreateBoardDialog from './overlays/CreateBoardDialog.vue';
 import SearchDialog from './overlays/SearchDialog.vue';
 import ContextMenu from './overlays/ContextMenu.vue';
 import SearchContextMenu from './overlays/SearchContextMenu.vue';
 import Preview from './Preview.vue';
+import Toolbar from './Toolbar.vue';
 
 export default {
   components: {
@@ -55,18 +58,20 @@ export default {
     Container,
     Counter,
     Chip,
+    Dice,
     SpeedDial,
     ImportDialog,
     CreateDialog,
+    CreateBoardDialog,
     SearchDialog,
     ContextMenu,
     SearchContextMenu,
     Preview,
-    Dice
+    Toolbar
   },
   computed: {
     objects() {
-      return this.$store.getters.tableObjects;
+      return this.$store.getters.tableObjects
     },
 
     tableStyle() {
@@ -81,12 +86,8 @@ export default {
       showCreateDialog: false,
       showSearchDialog: false,
       showContextMenu: false,
-      selectedObject: null,
-
-      table: {
-        x: 0,
-        y: 0
-      }
+      showCreateBoardDialog: false,
+      selectedObject: null
     };
   },
   methods: {
@@ -101,36 +102,25 @@ export default {
 
     const vueThis = this;
     
-    interact('#table').draggable({
-      listeners: {
-        move(event) {
-          vueThis.$store.commit('moveTable', { dx: event.dx, dy: event.dy });
-        }
-      }
-    });
+    // interact('#table').draggable({
+    //   listeners: {
+    //     move(event) {
+    //       vueThis.$store.commit('moveTable', { dx: event.dx, dy: event.dy });
+    //     }
+    //   }
+    // });
   }
 };
 </script>
 
-<style>
-body {
-  overflow: hidden;
-}
+<style scoped>
 #table {
-  height: 4000px;
-  width: 4000px;
+  height: 2000px;
+  width: 2000px;
   background-color: darkslategray;
   touch-action: none;
   will-change: transform;
   transform-origin: 0 0;
 }
-.draggable {
-  position: absolute;
-  touch-action: none;
-  will-change: transform, opacity;
-}
-.dragged {
-  opacity: 50%;
-  z-index: 1500 !important;
-}
+
 </style>

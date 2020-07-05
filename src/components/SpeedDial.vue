@@ -5,11 +5,11 @@
     </md-speed-dial-target>
 
     <md-speed-dial-content>
-      <md-button class="md-icon-button" @click="openHand">
-        <i class="fas fa-hand-paper" />
-      </md-button>
       <md-button class="md-icon-button" @click="$emit('showCreateDialog')">
         <i class="fas fa-plus-circle" />
+      </md-button>
+      <md-button class="md-icon-button" @click="$emit('showCreateBoardDialog')">
+        <i class="fas fa-chess-board" />
       </md-button>
       <md-button class="md-icon-button">
         <i class="fas fa-file-image" />
@@ -33,16 +33,15 @@ export default {
       const url = element.setAttribute(
         'href',
         'data:text/json;charset=utf-8,' +
-        window.encodeURIComponent(JSON.stringify(this.$store.state.objects))
+        window.encodeURIComponent(JSON.stringify({
+          game: this.$store.state.objects,
+          boards: this.$store.state.boards
+        }))
       );
       element.setAttribute('download', 'game.json');
       document.body.appendChild(element);
       element.click();
       document.body.removeChild(element);
-    },
-    openHand() {
-      const handWindow = window.open('/#/hand', 'Hand', 'resizable=yes,scrollbars=no,width=860,height=400');
-      this.$store.commit('setHandWindow', handWindow);
     }
   }
 };
