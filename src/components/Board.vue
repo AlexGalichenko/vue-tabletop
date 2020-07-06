@@ -50,19 +50,21 @@ export default {
       return this.$store.getters.boardObjects(this.$route.params.id);
     },
 
+    boardData() {
+      return this.$store.getters.boardData(this.$route.params.id)
+    },
+
     tableStyle() {
       return {
+        'height': `${this.boardData ? this.boardData.height : 600}px`,
+        'width': `${this.boardData ? this.boardData.width : 800}px`,
         'transform': `scale(${this.$store.state.zoom})`
       }
     }
   },
   data() {
     return {
-      showImportDialog: false,
-      showCreateDialog: false,
-      showSearchDialog: false,
-      showContextMenu: false,
-      selectedObject: null,
+      selectedObject: null
     };
   },
   methods: {
@@ -78,8 +80,6 @@ export default {
 
 <style scoped>
 #board {
-  height: 2000px;
-  width: 2000px;
   background-color: darkslategray;
   touch-action: none;
   will-change: transform;
