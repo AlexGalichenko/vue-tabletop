@@ -1,7 +1,7 @@
 <template>
   <md-toolbar id="toolbox" class="md-primary md-dense">
     <div>
-      <md-button @click="openHand">Hand</md-button>
+      <md-button @click="openHand"><i class="fas fa-hand-paper" /></md-button>
     </div>
     <div v-for="board in boards" :key="board.id">
       <md-button @click="openBoard(board)">{{board.name}}</md-button>
@@ -19,10 +19,12 @@ export default {
   },
   methods: {
     openBoard(board) {
-      window.open(
+      const height = Math.min(+board.height + 1, window.innerHeight);
+      const width = Math.min(+board.width + 1, window.innerWidth);
+      const boardWindow = window.open(
         `/#/board/${board.id}`,
         board.name,
-        `resizable=yes,scrollbars=no,width=800,height=600`
+        `resizable=yes,scrollbars=no,width=${width},height=${height}`
       );
     },
     openHand() {

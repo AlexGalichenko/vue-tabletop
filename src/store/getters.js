@@ -7,5 +7,8 @@ export default {
   },
   handObjects(state) {
     return state.objects.filter(obj => obj.owner === state.username).sort((a, b) => a.updated - b.updated);
+  },
+  boardData(state) {
+    return id => state.boards.find(board => board.id === id);
   }
 }

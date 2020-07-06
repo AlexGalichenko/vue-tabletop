@@ -1,4 +1,5 @@
 const uniqid = require('uniqid');
+const compression = require('compression');
 const cloneDeep = require('clone-deep');
 const { getObject, getObjectIndex, getZ } = require('./utils.js');
 const express = require('express');
@@ -11,6 +12,7 @@ db.players = new Set();
 // heroku port
 server.listen(process.env.PORT || 8000);
 
+app.use(compression());
 app.use(express.static('dist'));
 
 io.on('connection', socket => {
@@ -131,6 +133,8 @@ io.on('connection', socket => {
     socket.on('deal', ({objectId, player}) => {
       const object = getObject(db, objectId);
       object.owner = player;
+      object.x = 25;
+      object.y = 25;
       object.updated = Date.now();
       io.emit('update_object', object);
     });

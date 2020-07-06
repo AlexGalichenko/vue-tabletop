@@ -11,9 +11,6 @@
       <md-button class="md-icon-button" @click="$emit('showCreateBoardDialog')">
         <i class="fas fa-chess-board" />
       </md-button>
-      <md-button class="md-icon-button">
-        <i class="fas fa-file-image" />
-      </md-button>
       <md-button class="md-icon-button" @click="saveGame">
         <i class="fas fa-download" />
       </md-button>

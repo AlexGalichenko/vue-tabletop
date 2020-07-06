@@ -1,6 +1,7 @@
 const path = require('path');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
 module.exports = {
   mode: 'development',
@@ -10,6 +11,11 @@ module.exports = {
   output: {
     path: path.resolve('./dist'),
     filename: 'bundle.js'
+  },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+    }
   },
   module: {
     rules: [
@@ -36,13 +42,7 @@ module.exports = {
           'vue-style-loader',
           'css-loader'
         ]
-      },
-      // {
-      //     test: /\.(jpg|png)$/,
-      //     use: {
-      //         loader: 'url-loader',
-      //     },
-      // }
+      }
     ]
   },
   plugins: [
@@ -51,5 +51,6 @@ module.exports = {
       template: './src/index.html',
       filename: 'index.html'
     }),
+    // new BundleAnalyzerPlugin()
   ]
 };
